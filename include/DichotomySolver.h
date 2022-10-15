@@ -4,6 +4,10 @@
 #include "AbstractSolver.h"
 #include <QProcess>
 
+///
+/// \class DichotomySolver
+/// \brief Наследник AbstractSolver, решающий задачу поиска минимума/максимума методом дихотомии.
+///
 class DichotomySolver : public AbstractSolver
 {
 public:

@@ -22,7 +22,13 @@ public:
 private:
     QHttpServer server;
     short serverPort = 8080;
-    QString processRequest(const QHttpServerRequest &request);
+
+    ///
+    /// \brief Обработчик запроса, который вызывается из лямбда-функций, вызываемых QHttpServer::route.
+    /// \param solver - указатель на любой класс, решающий задачу (наследник AbstractSolver).
+    /// \param queryParameters - параметры, переданные пользователем через Http запрос.
+    /// \return
+    ///
     QHttpServerResponse processRequest(AbstractSolver *solver, const QUrlQuery &queryParameters);
 
 

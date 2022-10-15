@@ -7,6 +7,11 @@
 #include <QUrlQuery>
 #include <QVariant>
 
+
+///
+/// \class AbstractSolver
+/// \brief Класс, абстрагирующий решение задачи.
+///
 class AbstractSolver : public QObject
 {
     Q_OBJECT
