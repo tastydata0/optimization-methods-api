@@ -22,8 +22,10 @@ QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
     QProcess process;
     process.start(program, arguments);
 
-    // TODO timeout
-    process.waitForFinished();
+    QByteArray data = {"\"status\": \"fail\""};
+    if (process.waitForFinished()) {
+        data = process.readAllStandardOutput();
+    }
 
-    return QJsonDocument::fromJson(process.readAll());
+    return QJsonDocument::fromJson(data);
 }
