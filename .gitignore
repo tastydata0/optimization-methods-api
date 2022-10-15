@@ -31,6 +31,9 @@ Makefile*
 *build-*
 *.qm
 *.prl
+*.o
+.qtc_clangd/
+optimization-methods-api
 
 # Qt unit tests
 target_wrapper.*
