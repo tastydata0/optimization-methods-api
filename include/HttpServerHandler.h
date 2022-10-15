@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QHttpServer>
+#include "include/DichotomySolver.h"
+#include "qjsonobject.h"
 
 ///
 /// \class HttpServerHandler
@@ -21,6 +23,8 @@ private:
     QHttpServer server;
     short serverPort = 8080;
     QString processRequest(const QHttpServerRequest &request);
+    QHttpServerResponse processRequest(AbstractSolver *solver, const QUrlQuery &queryParameters);
+
 
 
 signals:
