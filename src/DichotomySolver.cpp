@@ -1,0 +1,31 @@
+#include "include/DichotomySolver.h"
+
+#include <QFileInfo>
+
+DichotomySolver::DichotomySolver(QObject *parent)
+    : AbstractSolver{parent}
+{
+
+}
+
+QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
+{
+    QString program = "python";
+
+    QStringList arguments;
+    arguments << "/home/alex/Programming/Python/Sandbox/dichotomy.py"
+              << input["left-bound"]
+              << input["right-bound"]
+              << input["function"]
+              << input["e"]
+              << input["l0"]
+              << input["target"];
+
+    QProcess process;
+    process.start(program, arguments);
+
+    // TODO timeout
+    process.waitForFinished();
+
+    return QJsonDocument::fromJson(process.readAll());
+}
