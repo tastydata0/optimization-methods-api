@@ -1,7 +1,5 @@
 #include "include/DichotomySolver.h"
 
-#include <QFileInfo>
-
 DichotomySolver::DichotomySolver(QObject *parent)
     : AbstractSolver{parent}
 {
@@ -13,7 +11,7 @@ QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
     QString program = "python";
 
     QStringList arguments;
-    arguments << "/home/alex/Programming/Python/Sandbox/dichotomy.py"
+    arguments << "scripts/dichotomy.py"
               << input["left-bound"]
               << input["right-bound"]
               << input["function"]

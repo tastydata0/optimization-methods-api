@@ -25,7 +25,3 @@ HEADERS += \
     include/AbstractSolver.h \
     include/DichotomySolver.h \
     include/HttpServerHandler.h \
-
-DISTFILES += \
-    scripts/dichotomy.py \
-    scripts/dichotomy.py
