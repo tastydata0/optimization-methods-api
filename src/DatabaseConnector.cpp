@@ -1,5 +1,8 @@
 #include "include/DatabaseConnector.h"
 
+#include <QSqlDriver>
+#include <QSqlError>
+
 
 
 DatabaseConnector::DatabaseConnector(QObject *parent)
@@ -14,7 +17,7 @@ bool DatabaseConnector::connect()
 
     const QSettings databaseSecrets("database_secrets.ini", QSettings::Format::IniFormat);
 
-    db = QSqlDatabase::addDatabase("QPSQL", "main");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", "main");
 
     db.setHostName(databaseSecrets.value("Database/DATABASE_HOST").toString());
     db.setDatabaseName(databaseSecrets.value("Database/DATABASE_NAME").toString());
@@ -33,7 +36,11 @@ bool DatabaseConnector::connect()
 
 void DatabaseConnector::disconnect()
 {
-    db.close();
+    {
+        QSqlDatabase db = QSqlDatabase::database("main");
+        db.close();
+    }
+
     QSqlDatabase::removeDatabase("main");
     qDebug() << "Disconnected from database";
 }
@@ -41,6 +48,23 @@ void DatabaseConnector::disconnect()
 
 DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QString &username, const QString &password)
 {
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen()) {
+        qDebug() << "Internal error: database is not open";
+
+        return REGISTER_USER_RESULT::INTERNAL_ERROR;
+    }
+
+    QString queryString = "CALL register_user('" + username + "', '" + password + "');";
+
+    QSqlQuery result(db);
+
+    if(!result.exec(queryString)) {
+        qDebug() << "Internal error";
+
+        return REGISTER_USER_RESULT::INTERNAL_ERROR;
+    }
 
 }
 
