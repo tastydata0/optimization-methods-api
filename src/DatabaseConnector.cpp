@@ -56,6 +56,11 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
     }
 
+    REGISTER_USER_RESULT exists = userExists(username);
+    if(exists == REGISTER_USER_RESULT::USER_EXISTS || exists == REGISTER_USER_RESULT::INTERNAL_ERROR) {
+        return exists;
+    }
+
     QString queryString = "CALL register_user('" + username + "', '" + password + "');";
 
     QSqlQuery result(db);
@@ -65,6 +70,8 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
 
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
     }
+
+    return REGISTER_USER_RESULT::OK;
 
 }
 
