@@ -73,3 +73,29 @@ DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::checkToken(const QStrin
 
 }
 
+DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::userExists(const QString &username)
+{
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen())
+        return REGISTER_USER_RESULT::INTERNAL_ERROR;
+
+    const QString queryString = "SELECT is_user_exists('" + username + "');";
+
+    QSqlQuery result(db);
+
+    if(!result.exec(queryString)) {
+        qDebug() << "Internal error";
+
+        return REGISTER_USER_RESULT::INTERNAL_ERROR;
+    }
+
+    result.next();
+    if(result.value(0).toBool()) {
+        return REGISTER_USER_RESULT::OK;
+    }
+    else {
+        return REGISTER_USER_RESULT::USER_EXISTS;
+    }
+}
+
