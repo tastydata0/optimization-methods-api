@@ -1,6 +1,6 @@
 QT -= gui
 QT += httpserver
- QT += concurrent
+QT += sql
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
@@ -11,6 +11,7 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/DatabaseConnector.cpp \
     src/DichotomySolver.cpp \
     src/AbstractSolver.cpp \
     src/HttpServerHandler.cpp \
@@ -23,5 +24,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     include/AbstractSolver.h \
+    include/DatabaseConnector.h \
     include/DichotomySolver.h \
     include/HttpServerHandler.h \
+    include/SettingsProvider.h
+
+DISTFILES += \
+    scripts/dichotomy.py
