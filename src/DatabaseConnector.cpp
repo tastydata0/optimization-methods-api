@@ -56,7 +56,7 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
     }
 
-    REGISTER_USER_RESULT exists = userExists(username);
+    REGISTER_USER_RESULT exists = usernameNotTaken(username);
     if(exists == REGISTER_USER_RESULT::USER_EXISTS || exists == REGISTER_USER_RESULT::INTERNAL_ERROR) {
         return exists;
     }
@@ -100,11 +100,9 @@ DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::doesUserHaveQuota(const
     else {
         return TOKEN_CHECK_RESULT::OUT_OF_QUOTA;
     }
-
-
 }
 
-DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::userExists(const QString &username)
+DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::usernameNotTaken(const QString &username)
 {
     QSqlDatabase db = QSqlDatabase::database("main");
 
@@ -129,4 +127,3 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::userExists(const QStr
         return REGISTER_USER_RESULT::USER_EXISTS;
     }
 }
-
