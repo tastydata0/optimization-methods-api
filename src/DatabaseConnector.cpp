@@ -63,9 +63,9 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
 
     QString queryString = "CALL register_user('" + username + "', '" + password + "');";
 
-    QSqlQuery result(db);
+    QSqlQuery query(db);
 
-    if(!result.exec(queryString)) {
+    if(!query.exec(queryString)) {
         qDebug() << "Internal error";
 
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
@@ -75,8 +75,32 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
 
 }
 
-DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::checkToken(const QString &token)
+DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::doesUserHaveQuota(const QString &token)
 {
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen())
+        return TOKEN_CHECK_RESULT::INTERNAL_ERROR;
+
+    const QString does_user_have_quota = "SELECT does_user_have_quota('%1');";
+
+    QSqlQuery query(db);
+
+
+    if(!query.exec(does_user_have_quota.arg(token))) {
+        qDebug() << "Internal error";
+
+        return TOKEN_CHECK_RESULT::INTERNAL_ERROR;
+    }
+
+    query.next();
+    if(query.value(0).toBool()) {
+        return TOKEN_CHECK_RESULT::OK;
+    }
+    else {
+        return TOKEN_CHECK_RESULT::OUT_OF_QUOTA;
+    }
+
 
 }
 
@@ -87,18 +111,18 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::userExists(const QStr
     if(!db.isOpen())
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
 
-    const QString queryString = "SELECT is_user_exists('" + username + "');";
+    const QString queryString = "SELECT is_user_exists('%1');";
 
-    QSqlQuery result(db);
+    QSqlQuery query(db);
 
-    if(!result.exec(queryString)) {
-        qDebug() << "Internal error";
+    if(!query.exec(queryString.arg(username))) {
+        qDebug() << "Internal error:" << query.lastError();
 
         return REGISTER_USER_RESULT::INTERNAL_ERROR;
     }
 
-    result.next();
-    if(result.value(0).toBool()) {
+    query.next();
+    if(query.value(0).toBool()) {
         return REGISTER_USER_RESULT::OK;
     }
     else {
