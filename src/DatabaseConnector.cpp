@@ -98,6 +98,27 @@ int DatabaseConnector::userQuota(const QString &token)
     return query.value(0).toInt();
 }
 
+bool DatabaseConnector::decreaseUserQuota(const QString &token)
+{
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen())
+        return false;
+
+    const QString user_quota = "CALL decrease_user_quota('%1');";
+
+    QSqlQuery query(db);
+
+
+    if(!query.exec(user_quota.arg(token))) {
+        qDebug() << "Internal error";
+
+        return false;
+    }
+
+    return true;
+}
+
 int DatabaseConnector::userIdFromCredentials(const QString &username, const QString &password)
 {
     QSqlDatabase db = QSqlDatabase::database("main");

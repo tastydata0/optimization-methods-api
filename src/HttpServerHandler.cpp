@@ -140,8 +140,10 @@ QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, co
 
     int userQuota = databaseConnector->userQuota(token);
     if(userQuota > 0) {
-        QJsonDocument output = solver->solve(query);
-        return QHttpServerResponse(output.object());
+        if(databaseConnector->decreaseUserQuota(token)) {
+            QJsonDocument output = solver->solve(query);
+            return QHttpServerResponse(output.object());
+        }
     }
     else if (userQuota == 0) {
         return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);

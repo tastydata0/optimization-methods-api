@@ -34,6 +34,12 @@ public:
     ///
     int userQuota(const QString& token);
 
+    ///
+    /// \brief уменьшение доступной квоты пользователя на 1.
+    /// \param token - токен пользователя
+    /// \return true при успехе, false при неудаче
+    ///
+    bool decreaseUserQuota(const QString& token);
 
     ///
     /// \brief Получение ID пользователя по логину и паролю.
