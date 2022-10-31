@@ -53,3 +53,11 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+
+.env
+
+database_secrets copy.ini
+
+database_secrets.ini
+
+certificates/
