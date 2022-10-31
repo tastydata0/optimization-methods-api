@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QSslKey>
 #include <QSslConfiguration>
+#include "include/DatabaseConnector.h"
 #include "include/DichotomySolver.h"
 #include "qjsonobject.h"
 
@@ -21,7 +22,7 @@ class HttpServerHandler : public QObject
 {
     Q_OBJECT
 public:
-    explicit HttpServerHandler(QObject *parent = nullptr);
+    explicit HttpServerHandler(DatabaseConnector *databaseConnector, QObject *parent = nullptr);
 
     short getServerPort() const;
     void setServerPort(short newServerPort);
@@ -46,6 +47,9 @@ public:
 
 private:
     QHttpServer server;
+
+    DatabaseConnector *databaseConnector;
+
     QSslCertificate sslCertificate;
     QSslKey sslPrivateKey;
     short serverPort = 8080;

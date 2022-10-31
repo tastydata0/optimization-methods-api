@@ -1,10 +1,10 @@
 #include "include/HttpServerHandler.h"
 
 
-HttpServerHandler::HttpServerHandler(QObject *parent)
-    : QObject{parent}
-{
 
+HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObject *parent) : QObject(parent),
+    databaseConnector(databaseConnector)
+{
     assert(setSslCertificate(pathToCertificate));
     assert(setSslPrivateKey(pathToPrivateKey));
     server.sslSetup(sslCertificate, sslPrivateKey);
@@ -14,7 +14,6 @@ HttpServerHandler::HttpServerHandler(QObject *parent)
     });
 
     server.route("/register", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
-        QUrlQuery queryParameters = request.query();
 
         QFile registerPage(pathToRegisterPage);
         if (!registerPage.open(QIODevice::ReadOnly)) {
@@ -25,15 +24,36 @@ HttpServerHandler::HttpServerHandler(QObject *parent)
     });
 
     server.route("/register", QHttpServerRequest::Method::Post, [&] (const QHttpServerRequest &request) {
-        QUrlQuery queryParameters = request.query();
 
         QUrlQuery postParameters(request.body());
 
+        QHash<QString, QString> parameters;
+
         foreach(const auto &item, postParameters.queryItems()) {
-            qDebug() << item.first << QUrl(item.second).path();
+            parameters[item.first] = QUrl(item.second).path();
         }
 
-        return "Спасибо!";
+
+        if(!parameters.contains("login")) {
+            return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
+        }
+        else if(!parameters.contains("psw")) {
+            return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
+        }
+
+        DatabaseConnector::REGISTER_USER_RESULT registerUserResult = databaseConnector->registerUser(parameters["login"], parameters["psw"]);
+
+        switch (registerUserResult) {
+            case DatabaseConnector::REGISTER_USER_RESULT::OK:
+                return QHttpServerResponse("Success!", QHttpServerResponse::StatusCode::Ok);
+                break;
+            case DatabaseConnector::REGISTER_USER_RESULT::USER_EXISTS:
+                return QHttpServerResponse("User exists.", QHttpServerResponse::StatusCode::BadRequest);
+                break;
+            case DatabaseConnector::REGISTER_USER_RESULT::INTERNAL_ERROR:
+                return QHttpServerResponse("Internal error.", QHttpServerResponse::StatusCode::InternalServerError);
+                break;
+        }
     });
 
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
@@ -92,3 +112,6 @@ void HttpServerHandler::startServer()
     qDebug() << "Server started";
     emit serverStarted();
 }
+
+
+

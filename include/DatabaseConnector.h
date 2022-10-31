@@ -20,17 +20,6 @@ public:
     explicit DatabaseConnector(QObject *parent = nullptr);
 
     ///
-    /// \brief Подключение к БД, используя данные из database_secrets.ini.
-    /// \return true, если подключение удалось, иначе false.
-    ///
-    bool connect();
-
-    ///
-    /// \brief Отключение от БД.
-    ///
-    void disconnect();
-
-    ///
     /// \brief Регистрация пользователя.
     /// \param username - имя пользователя
     /// \param password - пароль
@@ -45,7 +34,7 @@ public:
     ///
     TOKEN_CHECK_RESULT doesUserHaveQuota(const QString& token);
 
-private:
+public:
 
     ///
     /// \brief Проверка, существует ли пользователь с таким именем
@@ -54,7 +43,18 @@ private:
     ///
     REGISTER_USER_RESULT usernameNotTaken(const QString& username);
 
-signals:
+public slots:
+
+    ///
+    /// \brief Подключение к БД, используя данные из database_secrets.ini.
+    /// \return true, если подключение удалось, иначе false.
+    ///
+    bool connect();
+
+    ///
+    /// \brief Отключение от БД.
+    ///
+    void disconnect();
 
 };
 

@@ -1,16 +1,24 @@
 #include <QCoreApplication>
 #include <QHttpServer>
 #include <QDebug>
-#include <QtConcurrent>
 
+#include <include/DatabaseConnector.h>
 #include <include/HttpServerHandler.h>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    HttpServerHandler handler;
+
+
+    DatabaseConnector connector;
+
+    HttpServerHandler handler(&connector);
+
     handler.startServer();
+    connector.connect();
+
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, &connector, &DatabaseConnector::disconnect);
 
     return a.exec();
 }

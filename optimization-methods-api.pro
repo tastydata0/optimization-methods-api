@@ -33,4 +33,5 @@ DISTFILES += \
     scripts/dichotomy.py
 
 RESOURCES += \
-    certificates/certificates.qrc
+    certificates/certificates.qrc \
+    webpages/webpages.qrc
