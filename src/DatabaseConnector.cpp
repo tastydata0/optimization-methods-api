@@ -36,6 +36,7 @@ bool DatabaseConnector::connect()
 
 void DatabaseConnector::disconnect()
 {
+    qDebug() << "Disconnecting from database";
     {
         QSqlDatabase db = QSqlDatabase::database("main");
         db.close();
@@ -120,7 +121,7 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::usernameNotTaken(cons
     }
 
     query.next();
-    if(query.value(0).toBool()) {
+    if(!query.value(0).toBool()) {
         return REGISTER_USER_RESULT::OK;
     }
     else {
