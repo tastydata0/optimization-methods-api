@@ -11,6 +11,7 @@
 
 #define pathToCertificate ":/certificate.pem"
 #define pathToPrivateKey ":/privatekey.key"
+#define pathToRegisterPage ":/register.html"
 
 ///
 /// \class HttpServerHandler

@@ -7,7 +7,7 @@ HttpServerHandler::HttpServerHandler(QObject *parent)
 
     assert(setSslCertificate(pathToCertificate));
     assert(setSslPrivateKey(pathToPrivateKey));
-    server.sslSetup(sslCertificate, sslPrivateKey, QSsl::AnyProtocol);
+    server.sslSetup(sslCertificate, sslPrivateKey);
 
     server.route("/", [] () {
         return "Index";
@@ -16,7 +16,24 @@ HttpServerHandler::HttpServerHandler(QObject *parent)
     server.route("/register", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
         QUrlQuery queryParameters = request.query();
 
-        return "TODO";
+        QFile registerPage(pathToRegisterPage);
+        if (!registerPage.open(QIODevice::ReadOnly)) {
+            return QHttpServerResponse("Internal error", QHttpServerResponse::StatusCode::InternalServerError);
+        }
+
+        return QHttpServerResponse(QString::fromStdString(registerPage.readAll().toStdString()));
+    });
+
+    server.route("/register", QHttpServerRequest::Method::Post, [&] (const QHttpServerRequest &request) {
+        QUrlQuery queryParameters = request.query();
+
+        QUrlQuery postParameters(request.body());
+
+        foreach(const auto &item, postParameters.queryItems()) {
+            qDebug() << item.first << QUrl(item.second).path();
+        }
+
+        return "Спасибо!";
     });
 
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
