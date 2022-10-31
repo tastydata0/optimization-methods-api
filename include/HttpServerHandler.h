@@ -64,10 +64,10 @@ private:
     ///
     /// \brief Обработчик запроса, который вызывается из лямбда-функций, вызываемых QHttpServer::route.
     /// \param solver - указатель на любой класс, решающий задачу (наследник AbstractSolver).
-    /// \param queryParameters - параметры, переданные пользователем через Http запрос.
+    /// \param request - Http запрос QHttpServerRequest.
     /// \return
     ///
-    QHttpServerResponse processRequest(AbstractSolver *solver, const QUrlQuery &queryParameters);
+    QHttpServerResponse processRequest(AbstractSolver *solver, const QHttpServerRequest &request);
 
 
 

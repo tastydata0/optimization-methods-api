@@ -121,19 +121,34 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
     });
 
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
-        QUrlQuery queryParameters = request.query();
 
         DichotomySolver solver;
 
-        return processRequest(&solver, queryParameters);
+        return processRequest(&solver, request);
     });
 }
 
-QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, const QUrlQuery &queryParameters)
+QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, const QHttpServerRequest &request)
 {
-    QJsonDocument output = solver->solve(solver->urlQueryToMap(queryParameters));
+    QString token = request.value("api_key");
 
-    return QHttpServerResponse(output.object());
+    QHash<QString, QString> query = solver->urlQueryToMap(request.query());
+
+    if(token == "" && query.contains("api_key")) {
+        token = query["api_key"];
+    }
+
+    int userQuota = databaseConnector->userQuota(token);
+    if(userQuota > 0) {
+        QJsonDocument output = solver->solve(query);
+        return QHttpServerResponse(output.object());
+    }
+    else if (userQuota == 0) {
+        return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
+    }
+    else if(userQuota == -1) {
+        return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
+    }
 }
 
 
