@@ -28,11 +28,11 @@ public:
     REGISTER_USER_RESULT registerUser(const QString& username, const QString& password);
 
     ///
-    /// \brief Проверка, осталась ли квота у пользователя.
+    /// \brief Проверка, сколько осталось квоты у пользователя.
     /// \param token - токен вида 11111f11-d518-4652-bb62-891c529f02a7
-    /// \return TOKEN_CHECK_RESULT::OK, если квота есть, OUT_OF_QUOTA
+    /// \return -1 при внутренней ошибке, размер квоты при успешном запросе.
     ///
-    TOKEN_CHECK_RESULT doesUserHaveQuota(const QString& token);
+    int userQuota(const QString& token);
 
 
     ///

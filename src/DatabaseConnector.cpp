@@ -76,31 +76,26 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
 
 }
 
-DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::doesUserHaveQuota(const QString &token)
+int DatabaseConnector::userQuota(const QString &token)
 {
     QSqlDatabase db = QSqlDatabase::database("main");
 
     if(!db.isOpen())
-        return TOKEN_CHECK_RESULT::INTERNAL_ERROR;
+        return -1;
 
-    const QString does_user_have_quota = "SELECT does_user_have_quota('%1');";
+    const QString user_quota = "SELECT user_quota('%1');";
 
     QSqlQuery query(db);
 
 
-    if(!query.exec(does_user_have_quota.arg(token))) {
+    if(!query.exec(user_quota.arg(token))) {
         qDebug() << "Internal error";
 
-        return TOKEN_CHECK_RESULT::INTERNAL_ERROR;
+        return -1;
     }
 
     query.next();
-    if(query.value(0).toBool()) {
-        return TOKEN_CHECK_RESULT::OK;
-    }
-    else {
-        return TOKEN_CHECK_RESULT::OUT_OF_QUOTA;
-    }
+    return query.value(0).toInt();
 }
 
 int DatabaseConnector::userIdFromCredentials(const QString &username, const QString &password)

@@ -113,7 +113,9 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
                 return internalErrorResponse;
             }
 
-            return QHttpServerResponse(QString::fromStdString(tokenPage.readAll().toStdString()).arg(userToken));
+            int remainingUserQuota = databaseConnector->userQuota(userToken);
+
+            return QHttpServerResponse(QString::fromStdString(tokenPage.readAll().toStdString()).arg(userToken).arg(remainingUserQuota));
         }
 
     });
