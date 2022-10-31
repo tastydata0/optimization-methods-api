@@ -1,6 +1,7 @@
 QT -= gui
 QT += httpserver
 QT += sql
+QT += network
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
@@ -27,7 +28,9 @@ HEADERS += \
     include/DatabaseConnector.h \
     include/DichotomySolver.h \
     include/HttpServerHandler.h \
-    include/SettingsProvider.h
 
 DISTFILES += \
     scripts/dichotomy.py
+
+RESOURCES += \
+    certificates/certificates.qrc
