@@ -34,7 +34,18 @@ public:
     ///
     TOKEN_CHECK_RESULT doesUserHaveQuota(const QString& token);
 
-public:
+
+    ///
+    /// \brief Получение ID пользователя по логину и паролю.
+    /// \param username - имя пользователя
+    /// \param password - пароль
+    /// \return ID пользователя при успехе. Если пользователь не найден, возвращает 0. При внутренней ошибке вернет -1.
+    ///
+    int userIdFromCredentials(const QString& username, const QString& password);
+
+    QString tokenFromUserId(int userId);
+
+private:
 
     ///
     /// \brief Проверка, существует ли пользователь с таким именем

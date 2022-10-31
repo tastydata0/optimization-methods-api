@@ -103,6 +103,48 @@ DatabaseConnector::TOKEN_CHECK_RESULT DatabaseConnector::doesUserHaveQuota(const
     }
 }
 
+int DatabaseConnector::userIdFromCredentials(const QString &username, const QString &password)
+{
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen())
+        return -1;
+
+    const QString queryString = "SELECT user_id_from_credentials('%1', '%2');";
+
+    QSqlQuery query(db);
+
+    if(!query.exec(queryString.arg(username).arg(password))) {
+        qDebug() << "Internal error:" << query.lastError();
+
+        return -1;
+    }
+
+    query.next();
+    return query.value(0).toInt();
+}
+
+QString DatabaseConnector::tokenFromUserId(int userId)
+{
+    QSqlDatabase db = QSqlDatabase::database("main");
+
+    if(!db.isOpen())
+        return "";
+
+    const QString queryString = "SELECT token FROM users WHERE id = %1;";
+
+    QSqlQuery query(db);
+
+    if(!query.exec(queryString.arg(userId))) {
+        qDebug() << "Internal error:" << query.lastError();
+
+        return "";
+    }
+
+    query.next();
+    return query.value(0).toString();
+}
+
 DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::usernameNotTaken(const QString &username)
 {
     QSqlDatabase db = QSqlDatabase::database("main");

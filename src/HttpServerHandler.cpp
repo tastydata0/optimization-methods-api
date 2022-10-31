@@ -17,7 +17,7 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
 
         QFile registerPage(pathToRegisterPage);
         if (!registerPage.open(QIODevice::ReadOnly)) {
-            return QHttpServerResponse("Internal error", QHttpServerResponse::StatusCode::InternalServerError);
+            return internalErrorResponse;
         }
 
         return QHttpServerResponse(QString::fromStdString(registerPage.readAll().toStdString()));
@@ -51,9 +51,71 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
                 return QHttpServerResponse("User exists.", QHttpServerResponse::StatusCode::BadRequest);
                 break;
             case DatabaseConnector::REGISTER_USER_RESULT::INTERNAL_ERROR:
-                return QHttpServerResponse("Internal error.", QHttpServerResponse::StatusCode::InternalServerError);
+                return internalErrorResponse;
                 break;
         }
+    });
+
+
+    server.route("/login", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
+
+        QFile registerPage(pathToLoginPage);
+        if (!registerPage.open(QIODevice::ReadOnly)) {
+            return internalErrorResponse;
+        }
+
+        return QHttpServerResponse(QString::fromStdString(registerPage.readAll().toStdString()));
+    });
+
+
+
+    server.route("/token", QHttpServerRequest::Method::Post, [&] (const QHttpServerRequest &request) {
+
+        QUrlQuery postParameters(request.body());
+
+        QHash<QString, QString> parameters;
+
+        foreach(const auto &item, postParameters.queryItems()) {
+            parameters[item.first] = QUrl(item.second).path();
+        }
+
+
+        if(!parameters.contains("login")) {
+            return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
+        }
+        else if(!parameters.contains("psw")) {
+            return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
+        }
+
+        int userId = databaseConnector->userIdFromCredentials(parameters["login"], parameters["psw"]);
+
+        if(userId == -1) {
+            return internalErrorResponse;
+        }
+        else if(userId == 0) {
+            QFile userNotFoundPage(pathToUserNotFoundPage);
+            if (!userNotFoundPage.open(QIODevice::ReadOnly)) {
+                return internalErrorResponse;
+            }
+
+            return QHttpServerResponse(QString::fromStdString(userNotFoundPage.readAll().toStdString()),
+                                       QHttpServerResponse::StatusCode::BadRequest);
+        }
+        else {
+            QString userToken = databaseConnector->tokenFromUserId(userId);
+
+            if(userToken == "") {
+                return internalErrorResponse;
+            }
+
+            QFile tokenPage(pathToTokenPage);
+            if (!tokenPage.open(QIODevice::ReadOnly)) {
+                return internalErrorResponse;
+            }
+
+            return QHttpServerResponse(QString::fromStdString(tokenPage.readAll().toStdString()).arg(userToken));
+        }
+
     });
 
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {

@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>register.html</file>
+        <file>token.html</file>
+        <file>login.html</file>
+        <file>user_not_found.html</file>
     </qresource>
 </RCC>

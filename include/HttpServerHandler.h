@@ -13,6 +13,11 @@
 #define pathToCertificate ":/certificate.pem"
 #define pathToPrivateKey ":/privatekey.key"
 #define pathToRegisterPage ":/register.html"
+#define pathToTokenPage ":/token.html"
+#define pathToLoginPage ":/login.html"
+#define pathToUserNotFoundPage ":/user_not_found.html"
+
+#define internalErrorResponse QHttpServerResponse("Internal error", QHttpServerResponse::StatusCode::InternalServerError)
 
 ///
 /// \class HttpServerHandler
@@ -44,6 +49,8 @@ public:
     /// \return true при успешном присваивании, false при ошибке.
     ///
     bool setSslPrivateKey(const QString& path, const QByteArray& password = QByteArray(), QSsl::KeyAlgorithm algorithm = QSsl::Rsa, QSsl::EncodingFormat format = QSsl::Pem);
+
+    static const QHttpServerResponse &getInternalErrorResponse();
 
 private:
     QHttpServer server;
