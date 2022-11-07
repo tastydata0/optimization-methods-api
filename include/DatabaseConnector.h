@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QThread>
 
 class DatabaseConnector : public QObject
 {
@@ -13,6 +14,8 @@ class DatabaseConnector : public QObject
 
 
 public:
+
+    static const int MAX_DATABASE_CONNECTIONS_COUNT = 5;
 
     enum class REGISTER_USER_RESULT {OK, USER_EXISTS, INTERNAL_ERROR};
     enum class TOKEN_CHECK_RESULT {OK, OUT_OF_QUOTA, TOKEN_NOT_FOUND, INTERNAL_ERROR};
@@ -52,6 +55,8 @@ public:
     QString tokenFromUserId(int userId);
 
 private:
+
+    QString connectionName;
 
     ///
     /// \brief Проверка, существует ли пользователь с таким именем
