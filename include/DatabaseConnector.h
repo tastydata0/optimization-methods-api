@@ -15,6 +15,8 @@ class DatabaseConnector : public QObject
 
 public:
 
+    static const int MAX_DATABASE_CONNECTIONS_COUNT = 5;
+
     enum class REGISTER_USER_RESULT {OK, USER_EXISTS, INTERNAL_ERROR};
     enum class TOKEN_CHECK_RESULT {OK, OUT_OF_QUOTA, TOKEN_NOT_FOUND, INTERNAL_ERROR};
 

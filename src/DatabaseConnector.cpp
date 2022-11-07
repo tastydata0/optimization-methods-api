@@ -11,8 +11,6 @@ DatabaseConnector::DatabaseConnector(QObject *parent)
     connectionName = QString("%1").arg((qintptr)QThread::currentThread());
     if(!QSqlDatabase::connectionNames().contains(connectionName))
         connect();
-    else
-        qDebug() << "Running on established connection" << connectionName;
 }
 
 bool DatabaseConnector::connect()

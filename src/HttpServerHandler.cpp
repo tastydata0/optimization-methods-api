@@ -13,7 +13,7 @@ HttpServerHandler::HttpServerHandler(QThreadPool *databasePool, QObject *parent)
         return "Index";
     });
 
-    server.route("/register", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
+    server.route("/register", QHttpServerRequest::Method::Get, [&] () {
 
         QFile registerPage(pathToRegisterPage);
         if (!registerPage.open(QIODevice::ReadOnly)) {
