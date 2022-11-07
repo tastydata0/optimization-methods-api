@@ -40,9 +40,9 @@ public:
     ///
     /// \brief уменьшение доступной квоты пользователя на 1.
     /// \param token - токен пользователя
-    /// \return true при успехе, false при неудаче
+    /// \return 1, если квота есть, 0, если закончилась, -1 при неудаче
     ///
-    bool decreaseUserQuota(const QString& token);
+    int decreaseUserQuota(const QString& token);
 
     ///
     /// \brief Получение ID пользователя по логину и паролю.

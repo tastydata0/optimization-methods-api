@@ -150,18 +150,16 @@ QFuture<QHttpServerResponse> HttpServerHandler::processRequest(const QHttpServer
             token = query["api_key"];
         }
 
-        int userQuota = databaseConnector.userQuota(token);
-        if(userQuota > 0) {
-            if(databaseConnector.decreaseUserQuota(token)) {
-                Solver solver;
-                QJsonDocument output = solver.solve(query);
-                return QHttpServerResponse(output.object());
-            }
+        int enoughUserQuota = databaseConnector.decreaseUserQuota(token);
+
+        if(enoughUserQuota == 1) {
+            QJsonDocument output = Solver().solve(query);
+            return QHttpServerResponse(output.object());
         }
-        else if (userQuota == 0) {
+        else if (enoughUserQuota == 0) {
             return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
         }
-        else if(userQuota == -1) {
+        else if(enoughUserQuota == -1) {
             return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
         }
     });
