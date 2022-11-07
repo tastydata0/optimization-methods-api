@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     HttpServerHandler handler(&connector);
 
     handler.startServer();
-    connector.connect();
+    assert(connector.connect());
 
     QObject::connect(&a, &QCoreApplication::aboutToQuit, &connector, &DatabaseConnector::disconnect);
 

@@ -120,19 +120,18 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
 
     });
 
+
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
-
-        DichotomySolver solver;
-
-        return processRequest(&solver, request);
+        return processRequest<DichotomySolver>(request);
     });
 }
 
-QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, const QHttpServerRequest &request)
+template<class Solver>
+QFuture<QHttpServerResponse> HttpServerHandler::processRequest(const QHttpServerRequest &request)
 {
     QString token = request.value("api_key");
 
-    QHash<QString, QString> query = solver->urlQueryToMap(request.query());
+    QHash<QString, QString> query = solver.urlQueryToMap(request.query());
 
     if(token == "" && query.contains("api_key")) {
         token = query["api_key"];
@@ -141,15 +140,22 @@ QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, co
     int userQuota = databaseConnector->userQuota(token);
     if(userQuota > 0) {
         if(databaseConnector->decreaseUserQuota(token)) {
-            QJsonDocument output = solver->solve(query);
-            return QHttpServerResponse(output.object());
+            return QtConcurrent::run([=] () {
+                Solver solver;
+                QJsonDocument output = solver.solve(query);
+                return QHttpServerResponse(output.object());
+            });
         }
     }
     else if (userQuota == 0) {
-        return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
+        return QtConcurrent::run([&] () {
+            return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
+        });
     }
     else if(userQuota == -1) {
-        return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
+        return QtConcurrent::run([&] () {
+            return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
+        });
     }
 }
 

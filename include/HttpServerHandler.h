@@ -9,6 +9,7 @@
 #include "include/DatabaseConnector.h"
 #include "include/DichotomySolver.h"
 #include "qjsonobject.h"
+#include <QtConcurrent>
 
 #define pathToCertificate ":/certificate.pem"
 #define pathToPrivateKey ":/privatekey.key"
@@ -54,6 +55,7 @@ public:
 
 private:
     QHttpServer server;
+    DichotomySolver solver;
 
     DatabaseConnector *databaseConnector;
 
@@ -67,7 +69,8 @@ private:
     /// \param request - Http запрос QHttpServerRequest.
     /// \return
     ///
-    QHttpServerResponse processRequest(AbstractSolver *solver, const QHttpServerRequest &request);
+    template<class Solver>
+    QFuture<QHttpServerResponse> processRequest(const QHttpServerRequest &request);
 
 
 
