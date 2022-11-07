@@ -9,6 +9,7 @@
 #include "include/DatabaseConnector.h"
 #include "include/DichotomySolver.h"
 #include "qjsonobject.h"
+#include <QtConcurrent>
 
 #define pathToCertificate ":/certificate.pem"
 #define pathToPrivateKey ":/privatekey.key"
@@ -27,7 +28,7 @@ class HttpServerHandler : public QObject
 {
     Q_OBJECT
 public:
-    explicit HttpServerHandler(DatabaseConnector *databaseConnector, QObject *parent = nullptr);
+    explicit HttpServerHandler(QThreadPool *databasePool, QObject *parent = nullptr);
 
     short getServerPort() const;
     void setServerPort(short newServerPort);
@@ -54,8 +55,9 @@ public:
 
 private:
     QHttpServer server;
+    DichotomySolver solver;
 
-    DatabaseConnector *databaseConnector;
+    QThreadPool *databaseConnectionsPool;
 
     QSslCertificate sslCertificate;
     QSslKey sslPrivateKey;
@@ -67,7 +69,8 @@ private:
     /// \param request - Http запрос QHttpServerRequest.
     /// \return
     ///
-    QHttpServerResponse processRequest(AbstractSolver *solver, const QHttpServerRequest &request);
+    template<class Solver>
+    QFuture<QHttpServerResponse> processRequest(const QHttpServerRequest &request);
 
 
 

@@ -8,7 +8,9 @@
 DatabaseConnector::DatabaseConnector(QObject *parent)
     : QObject{parent}
 {
-
+    connectionName = QString("%1").arg((qintptr)QThread::currentThread());
+    if(!QSqlDatabase::connectionNames().contains(connectionName))
+        connect();
 }
 
 bool DatabaseConnector::connect()
@@ -17,7 +19,7 @@ bool DatabaseConnector::connect()
 
     const QSettings databaseSecrets("database_secrets.ini", QSettings::Format::IniFormat);
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", "main");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", connectionName);
 
     db.setHostName(databaseSecrets.value("Database/DATABASE_HOST").toString());
     db.setDatabaseName(databaseSecrets.value("Database/DATABASE_NAME").toString());
@@ -27,7 +29,7 @@ bool DatabaseConnector::connect()
     ok = db.open();
 
     if(ok)
-        qDebug() << "Connected to database";
+        qDebug() << "Connected to database. Connection:" << connectionName;
     else
         qDebug() << "Failed to connect to database";
 
@@ -38,18 +40,18 @@ void DatabaseConnector::disconnect()
 {
     qDebug() << "Disconnecting from database";
     {
-        QSqlDatabase db = QSqlDatabase::database("main");
+        QSqlDatabase db = QSqlDatabase::database(connectionName);
         db.close();
     }
 
-    QSqlDatabase::removeDatabase("main");
+    QSqlDatabase::removeDatabase(connectionName);
     qDebug() << "Disconnected from database";
 }
 
 
 DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QString &username, const QString &password)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen()) {
         qDebug() << "Internal error: database is not open";
@@ -78,7 +80,7 @@ DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::registerUser(const QS
 
 int DatabaseConnector::userQuota(const QString &token)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen())
         return -1;
@@ -100,7 +102,7 @@ int DatabaseConnector::userQuota(const QString &token)
 
 bool DatabaseConnector::decreaseUserQuota(const QString &token)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen())
         return false;
@@ -121,7 +123,7 @@ bool DatabaseConnector::decreaseUserQuota(const QString &token)
 
 int DatabaseConnector::userIdFromCredentials(const QString &username, const QString &password)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen())
         return -1;
@@ -142,7 +144,7 @@ int DatabaseConnector::userIdFromCredentials(const QString &username, const QStr
 
 QString DatabaseConnector::tokenFromUserId(int userId)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen())
         return "";
@@ -163,7 +165,7 @@ QString DatabaseConnector::tokenFromUserId(int userId)
 
 DatabaseConnector::REGISTER_USER_RESULT DatabaseConnector::usernameNotTaken(const QString &username)
 {
-    QSqlDatabase db = QSqlDatabase::database("main");
+    QSqlDatabase db = QSqlDatabase::database(connectionName);
 
     if(!db.isOpen())
         return REGISTER_USER_RESULT::INTERNAL_ERROR;

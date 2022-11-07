@@ -6,7 +6,7 @@ DichotomySolver::DichotomySolver(QObject *parent)
 
 }
 
-QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
+QJsonDocument DichotomySolver::solve(const QHash<QString, QString> input)
 {
     QString program = "python";
 
@@ -26,6 +26,7 @@ QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
     if (process.waitForFinished()) {
         data = process.readAllStandardOutput();
     }
+    process.close();
 
     return QJsonDocument::fromJson(data);
 }

@@ -1,10 +1,10 @@
 #include "include/HttpServerHandler.h"
 
 
-
-HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObject *parent) : QObject(parent),
-    databaseConnector(databaseConnector)
+// const QThreadPool &databasePool,
+HttpServerHandler::HttpServerHandler(QThreadPool *databasePool, QObject *parent) : QObject(parent)
 {
+    this->databaseConnectionsPool = databasePool;
     assert(setSslCertificate(pathToCertificate));
     assert(setSslPrivateKey(pathToPrivateKey));
     server.sslSetup(sslCertificate, sslPrivateKey);
@@ -13,7 +13,7 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
         return "Index";
     });
 
-    server.route("/register", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
+    server.route("/register", QHttpServerRequest::Method::Get, [&] () {
 
         QFile registerPage(pathToRegisterPage);
         if (!registerPage.open(QIODevice::ReadOnly)) {
@@ -25,132 +25,146 @@ HttpServerHandler::HttpServerHandler(DatabaseConnector *databaseConnector, QObje
 
     server.route("/register", QHttpServerRequest::Method::Post, [&] (const QHttpServerRequest &request) {
 
-        QUrlQuery postParameters(request.body());
+        return QtConcurrent::run(databaseConnectionsPool, [&request] () {
+            DatabaseConnector databaseConnector;
 
-        QHash<QString, QString> parameters;
+            QUrlQuery postParameters(request.body());
 
-        foreach(const auto &item, postParameters.queryItems()) {
-            parameters[item.first] = QUrl(item.second).path();
-        }
+            QHash<QString, QString> parameters;
+
+            foreach(const auto &item, postParameters.queryItems()) {
+                parameters[item.first] = QUrl(item.second).path();
+            }
 
 
-        if(!parameters.contains("login")) {
-            return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
-        }
-        else if(!parameters.contains("psw")) {
-            return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
-        }
+            if(!parameters.contains("login")) {
+                return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
+            }
+            else if(!parameters.contains("psw")) {
+                return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
+            }
 
-        DatabaseConnector::REGISTER_USER_RESULT registerUserResult = databaseConnector->registerUser(parameters["login"], parameters["psw"]);
+            DatabaseConnector::REGISTER_USER_RESULT registerUserResult = databaseConnector.registerUser(parameters["login"], parameters["psw"]);
 
-        switch (registerUserResult) {
-            case DatabaseConnector::REGISTER_USER_RESULT::OK:
-                return QHttpServerResponse("Success!", QHttpServerResponse::StatusCode::Ok);
-                break;
-            case DatabaseConnector::REGISTER_USER_RESULT::USER_EXISTS:
-                return QHttpServerResponse("User exists.", QHttpServerResponse::StatusCode::BadRequest);
-                break;
-            case DatabaseConnector::REGISTER_USER_RESULT::INTERNAL_ERROR:
-                return internalErrorResponse;
-                break;
-        }
+            switch (registerUserResult) {
+                case DatabaseConnector::REGISTER_USER_RESULT::OK:
+                    return QHttpServerResponse("Success!", QHttpServerResponse::StatusCode::Ok);
+                    break;
+                case DatabaseConnector::REGISTER_USER_RESULT::USER_EXISTS:
+                    return QHttpServerResponse("User exists.", QHttpServerResponse::StatusCode::BadRequest);
+                    break;
+                case DatabaseConnector::REGISTER_USER_RESULT::INTERNAL_ERROR:
+                    return internalErrorResponse;
+                    break;
+            }
+        });
+
     });
 
 
-    server.route("/login", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
+    server.route("/login", QHttpServerRequest::Method::Get, [&] () {
+        return QtConcurrent::run(databaseConnectionsPool, [] () {
+            QFile registerPage(pathToLoginPage);
+            if (!registerPage.open(QIODevice::ReadOnly)) {
+                return internalErrorResponse;
+            }
 
-        QFile registerPage(pathToLoginPage);
-        if (!registerPage.open(QIODevice::ReadOnly)) {
-            return internalErrorResponse;
-        }
-
-        return QHttpServerResponse(QString::fromStdString(registerPage.readAll().toStdString()));
+            return QHttpServerResponse(QString::fromStdString(registerPage.readAll().toStdString()));
+        });
     });
 
 
 
     server.route("/token", QHttpServerRequest::Method::Post, [&] (const QHttpServerRequest &request) {
 
-        QUrlQuery postParameters(request.body());
+        return QtConcurrent::run(databaseConnectionsPool, [&request] () {
 
-        QHash<QString, QString> parameters;
+            DatabaseConnector databaseConnector;
 
-        foreach(const auto &item, postParameters.queryItems()) {
-            parameters[item.first] = QUrl(item.second).path();
-        }
+            QUrlQuery postParameters(request.body());
 
+            QHash<QString, QString> parameters;
 
-        if(!parameters.contains("login")) {
-            return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
-        }
-        else if(!parameters.contains("psw")) {
-            return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
-        }
-
-        int userId = databaseConnector->userIdFromCredentials(parameters["login"], parameters["psw"]);
-
-        if(userId == -1) {
-            return internalErrorResponse;
-        }
-        else if(userId == 0) {
-            QFile userNotFoundPage(pathToUserNotFoundPage);
-            if (!userNotFoundPage.open(QIODevice::ReadOnly)) {
-                return internalErrorResponse;
+            foreach(const auto &item, postParameters.queryItems()) {
+                parameters[item.first] = QUrl(item.second).path();
             }
 
-            return QHttpServerResponse(QString::fromStdString(userNotFoundPage.readAll().toStdString()),
-                                       QHttpServerResponse::StatusCode::BadRequest);
-        }
-        else {
-            QString userToken = databaseConnector->tokenFromUserId(userId);
 
-            if(userToken == "") {
-                return internalErrorResponse;
+            if(!parameters.contains("login")) {
+                return QHttpServerResponse("Request must contain \"login\"", QHttpServerResponse::StatusCode::BadRequest);
+            }
+            else if(!parameters.contains("psw")) {
+                return QHttpServerResponse("Request must contain \"psw\" (password)", QHttpServerResponse::StatusCode::BadRequest);
             }
 
-            QFile tokenPage(pathToTokenPage);
-            if (!tokenPage.open(QIODevice::ReadOnly)) {
+            int userId = databaseConnector.userIdFromCredentials(parameters["login"], parameters["psw"]);
+
+            if(userId == -1) {
                 return internalErrorResponse;
             }
+            else if(userId == 0) {
+                QFile userNotFoundPage(pathToUserNotFoundPage);
+                if (!userNotFoundPage.open(QIODevice::ReadOnly)) {
+                    return internalErrorResponse;
+                }
 
-            int remainingUserQuota = databaseConnector->userQuota(userToken);
+                return QHttpServerResponse(QString::fromStdString(userNotFoundPage.readAll().toStdString()),
+                                           QHttpServerResponse::StatusCode::BadRequest);
+            }
+            else {
+                QString userToken = databaseConnector.tokenFromUserId(userId);
 
-            return QHttpServerResponse(QString::fromStdString(tokenPage.readAll().toStdString()).arg(userToken).arg(remainingUserQuota));
-        }
+                if(userToken == "") {
+                    return internalErrorResponse;
+                }
 
+                QFile tokenPage(pathToTokenPage);
+                if (!tokenPage.open(QIODevice::ReadOnly)) {
+                    return internalErrorResponse;
+                }
+
+                int remainingUserQuota = databaseConnector.userQuota(userToken);
+
+                return QHttpServerResponse(QString::fromStdString(tokenPage.readAll().toStdString()).arg(userToken).arg(remainingUserQuota));
+            }
+        });
     });
 
+
     server.route("/dichotomy", QHttpServerRequest::Method::Get, [&] (const QHttpServerRequest &request) {
-
-        DichotomySolver solver;
-
-        return processRequest(&solver, request);
+        return processRequest<DichotomySolver>(request);
     });
 }
 
-QHttpServerResponse HttpServerHandler::processRequest(AbstractSolver *solver, const QHttpServerRequest &request)
+template<class Solver>
+QFuture<QHttpServerResponse> HttpServerHandler::processRequest(const QHttpServerRequest &request)
 {
-    QString token = request.value("api_key");
+    return QtConcurrent::run(databaseConnectionsPool, [&] () {
+        DatabaseConnector databaseConnector;
 
-    QHash<QString, QString> query = solver->urlQueryToMap(request.query());
+        QString token = request.value("api_key");
 
-    if(token == "" && query.contains("api_key")) {
-        token = query["api_key"];
-    }
+        QHash<QString, QString> query = solver.urlQueryToMap(request.query());
 
-    int userQuota = databaseConnector->userQuota(token);
-    if(userQuota > 0) {
-        if(databaseConnector->decreaseUserQuota(token)) {
-            QJsonDocument output = solver->solve(query);
-            return QHttpServerResponse(output.object());
+        if(token == "" && query.contains("api_key")) {
+            token = query["api_key"];
         }
-    }
-    else if (userQuota == 0) {
-        return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
-    }
-    else if(userQuota == -1) {
-        return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
-    }
+
+        int userQuota = databaseConnector.userQuota(token);
+        if(userQuota > 0) {
+            if(databaseConnector.decreaseUserQuota(token)) {
+                Solver solver;
+                QJsonDocument output = solver.solve(query);
+                return QHttpServerResponse(output.object());
+            }
+        }
+        else if (userQuota == 0) {
+            return QHttpServerResponse("{ \"success\": false,\"error\": \"Your API quota is 0\"}", QHttpServerResponse::StatusCode::Forbidden);
+        }
+        else if(userQuota == -1) {
+            return QHttpServerResponse("{\"success\": false,\"error\": \"Token not found or invalid\"}", QHttpServerResponse::StatusCode::BadRequest);
+        }
+    });
 }
 
 

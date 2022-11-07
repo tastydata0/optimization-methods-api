@@ -9,16 +9,18 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    QThreadPool databasePool;
+    databasePool.setMaxThreadCount(DatabaseConnector::MAX_DATABASE_CONNECTIONS_COUNT);
 
+    for(int i = 0; i < databasePool.maxThreadCount(); i++) {
+        (void) QtConcurrent::run(&databasePool, [] () {
+            DatabaseConnector();
+        });
+    }
 
-    DatabaseConnector connector;
-
-    HttpServerHandler handler(&connector);
+    HttpServerHandler handler(&databasePool);
 
     handler.startServer();
-    connector.connect();
-
-    QObject::connect(&a, &QCoreApplication::aboutToQuit, &connector, &DatabaseConnector::disconnect);
 
     return a.exec();
 }
