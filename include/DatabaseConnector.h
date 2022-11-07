@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QThread>
 
 class DatabaseConnector : public QObject
 {
@@ -52,6 +53,8 @@ public:
     QString tokenFromUserId(int userId);
 
 private:
+
+    QString connectionName;
 
     ///
     /// \brief Проверка, существует ли пользователь с таким именем

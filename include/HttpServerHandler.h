@@ -28,7 +28,7 @@ class HttpServerHandler : public QObject
 {
     Q_OBJECT
 public:
-    explicit HttpServerHandler(DatabaseConnector *databaseConnector, QObject *parent = nullptr);
+    explicit HttpServerHandler(QThreadPool *databasePool, QObject *parent = nullptr);
 
     short getServerPort() const;
     void setServerPort(short newServerPort);
@@ -57,7 +57,7 @@ private:
     QHttpServer server;
     DichotomySolver solver;
 
-    DatabaseConnector *databaseConnector;
+    QThreadPool *databaseConnectionsPool;
 
     QSslCertificate sslCertificate;
     QSslKey sslPrivateKey;

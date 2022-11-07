@@ -5,20 +5,18 @@
 #include <include/DatabaseConnector.h>
 #include <include/HttpServerHandler.h>
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    QThreadPool databasePool;
+    databasePool.setMaxThreadCount(5);
 
 
-    DatabaseConnector connector;
-
-    HttpServerHandler handler(&connector);
+    HttpServerHandler handler(&databasePool);
 
     handler.startServer();
-    assert(connector.connect());
-
-    QObject::connect(&a, &QCoreApplication::aboutToQuit, &connector, &DatabaseConnector::disconnect);
 
     return a.exec();
 }
