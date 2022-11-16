@@ -1,0 +1,55 @@
+\hypertarget{DatabaseConnector_8h_source}{}\doxysection{Database\+Connector.\+h}
+\label{DatabaseConnector_8h_source}\index{include/DatabaseConnector.h@{include/DatabaseConnector.h}}
+\mbox{\hyperlink{DatabaseConnector_8h}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DATABASECONNECTOR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DATABASECONNECTOR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QSettings>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QSqlDatabase>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QSqlQuery>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QThread>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <QSqlDriver>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QSqlError>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{classDatabaseConnector}{DatabaseConnector}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     Q\_OBJECT}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{classDatabaseConnector_a72eb534f34958d6de47df47e03121b2f}{MAX\_DATABASE\_CONNECTIONS\_COUNT}} = 5;}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{enum class} \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{REGISTER\_USER\_RESULT}} \{OK, USER\_EXISTS, INTERNAL\_ERROR\};}
+\DoxyCodeLine{25     \textcolor{keyword}{enum class} \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258e}{TOKEN\_CHECK\_RESULT}} \{OK, OUT\_OF\_QUOTA, TOKEN\_NOT\_FOUND, INTERNAL\_ERROR\};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{explicit} \mbox{\hyperlink{classDatabaseConnector_a6abcd3330347a660d0a96400bd69da0f}{DatabaseConnector}}(QObject *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{35     \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{REGISTER\_USER\_RESULT}} \mbox{\hyperlink{classDatabaseConnector_adf414a7a9003a9e5b4ec4b7b587894e4}{registerUser}}(\textcolor{keyword}{const} QString\& username, \textcolor{keyword}{const} QString\& password);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{int} \mbox{\hyperlink{classDatabaseConnector_a2bbef4d1745a77340d0029388eae384c}{userQuota}}(\textcolor{keyword}{const} QString\& token);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{int} \mbox{\hyperlink{classDatabaseConnector_a9bc6fc7f9090dcfc8e761293073b68ea}{decreaseUserQuota}}(\textcolor{keyword}{const} QString\& token);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{int} \mbox{\hyperlink{classDatabaseConnector_a41992ec486af63aed14f507f4873436f}{userIdFromCredentials}}(\textcolor{keyword}{const} QString\& username, \textcolor{keyword}{const} QString\& password);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     QString \mbox{\hyperlink{classDatabaseConnector_a5f5e79bbb4055bc3a0438d198fd94a11}{tokenFromUserId}}(\textcolor{keywordtype}{int} userId);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{private}:}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     QString connectionName;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{70     \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{REGISTER\_USER\_RESULT}} usernameNotTaken(\textcolor{keyword}{const} QString\& username);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDatabaseConnector_aa1aa6d6e4c67b2b3b61a598cc801805f}{connect}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} \mbox{\hyperlink{classDatabaseConnector_a3e5a7533877956070312220d98322587}{disconnect}}();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DATABASECONNECTOR\_H}}
+
+\end{DoxyCode}

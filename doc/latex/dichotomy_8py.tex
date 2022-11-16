@@ -1,0 +1,51 @@
+\hypertarget{dichotomy_8py}{}\doxysection{Файл scripts/dichotomy.py}
+\label{dichotomy_8py}\index{scripts/dichotomy.py@{scripts/dichotomy.py}}
+\doxysubsection*{Пространства имен}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacedichotomy}{dichotomy}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{dichotomy.\+f}} (x)
+\end{DoxyCompactItemize}
+\doxysubsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{dichotomy.\+L0\+\_\+lower}} = float(argv\mbox{[}1\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{dichotomy.\+L0\+\_\+upper}} = float(argv\mbox{[}2\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a8c8313869afeffa3f9299af18d8c8ec8}{dichotomy.\+function}} = argv\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{dichotomy.\+E}} = float(argv\mbox{[}4\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}{dichotomy.\+l0}} = float(argv\mbox{[}5\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_aef82219f7ae32b78fc92553b6dc4937d}{dichotomy.\+target}} = argv\mbox{[}6\mbox{]}.lower()
+\item 
+string \mbox{\hyperlink{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}{dichotomy.\+FIND\+\_\+\+MAX}} = \textquotesingle{}max\textquotesingle{}
+\item 
+dictionary \mbox{\hyperlink{namespacedichotomy_aa6155e87a22d88d9c5ad27c056c4ac93}{dichotomy.\+output\+\_\+json}} = \{\}
+\item 
+int \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{dichotomy.\+ROUND\+\_\+\+PRECISION}} = 12
+\item 
+list \mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{dichotomy.\+L}} = \mbox{[}\mbox{[}L0\+\_\+lower, L0\+\_\+upper\mbox{]}\mbox{]}
+\item 
+tuple \mbox{\hyperlink{namespacedichotomy_afb5cb3c837db3e86634e3eec82998b2f}{dichotomy.\+n}} = (2/log(2)) $\ast$ log((L0\+\_\+upper-\/L0\+\_\+lower -\/ E)/(l0-\/E))
+\item 
+int \mbox{\hyperlink{namespacedichotomy_ad47fbe22a5dbb4076e6edce212b61ea6}{dichotomy.\+x\+\_\+best}} = 0
+\item 
+string \mbox{\hyperlink{namespacedichotomy_ac23b983bb071e251313967e293196a2e}{dichotomy.\+f\+\_\+best}} = float(\textquotesingle{}-\/inf\textquotesingle{}) if FIND\+\_\+\+MAX else float(\textquotesingle{}inf\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{dichotomy.\+mid}} = round((L\mbox{[}-\/1\mbox{]}\mbox{[}1\mbox{]} + L\mbox{[}-\/1\mbox{]}\mbox{[}0\mbox{]})/2, ROUND\+\_\+\+PRECISION)
+\item 
+\mbox{\hyperlink{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}{dichotomy.\+x\+\_\+left}} = round(mid -\/ E/2, ROUND\+\_\+\+PRECISION)
+\item 
+\mbox{\hyperlink{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}{dichotomy.\+x\+\_\+right}} = round(mid + E/2, ROUND\+\_\+\+PRECISION)
+\item 
+\mbox{\hyperlink{namespacedichotomy_a499d83b1924022a2a97de2f616daf506}{dichotomy.\+f\+\_\+left}} = round(f(x\+\_\+left), ROUND\+\_\+\+PRECISION)
+\item 
+\mbox{\hyperlink{namespacedichotomy_ad02fd0bd95520ece8c6cce2cf8b7a1cc}{dichotomy.\+f\+\_\+right}} = round(f(x\+\_\+right), ROUND\+\_\+\+PRECISION)
+\end{DoxyCompactItemize}

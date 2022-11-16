@@ -1,0 +1,5 @@
+<map id="DichotomySolver" name="DichotomySolver">
+<area shape="rect" id="node1" title="Наследник AbstractSolver, решающий задачу поиска минимума/максимума методом дихотомии." alt="" coords="5,155,140,181"/>
+<area shape="rect" id="node2" href="$classAbstractSolver.html" title="Класс, абстрагирующий решение задачи." alt="" coords="14,80,131,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="35,5,110,32"/>
+</map>

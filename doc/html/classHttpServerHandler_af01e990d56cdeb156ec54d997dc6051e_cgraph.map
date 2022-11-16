@@ -1,0 +1,9 @@
+<map id="HttpServerHandler::HttpServerHandler" name="HttpServerHandler::HttpServerHandler">
+<area shape="rect" id="node1" title=" " alt="" coords="5,169,156,211"/>
+<area shape="rect" id="node2" href="$classDatabaseConnector.html#adf414a7a9003a9e5b4ec4b7b587894e4" title="Регистрация пользователя." alt="" coords="209,5,368,47"/>
+<area shape="rect" id="node3" href="$classHttpServerHandler.html#a7420875c3855b3d70a94d3b704d5b327" title="Установка сертификата из файла." alt="" coords="213,71,364,112"/>
+<area shape="rect" id="node4" href="$classHttpServerHandler.html#ae88aee28e5879d03d6f873efe181c0e9" title="Установка приватного ключа из файла." alt="" coords="213,136,364,177"/>
+<area shape="rect" id="node5" href="$classDatabaseConnector.html#a5f5e79bbb4055bc3a0438d198fd94a11" title=" " alt="" coords="209,201,368,243"/>
+<area shape="rect" id="node6" href="$classDatabaseConnector.html#a41992ec486af63aed14f507f4873436f" title="Получение ID пользователя по логину и паролю." alt="" coords="204,267,373,308"/>
+<area shape="rect" id="node7" href="$classDatabaseConnector.html#a2bbef4d1745a77340d0029388eae384c" title="Проверка, сколько осталось квоты у пользователя." alt="" coords="209,332,368,373"/>
+</map>

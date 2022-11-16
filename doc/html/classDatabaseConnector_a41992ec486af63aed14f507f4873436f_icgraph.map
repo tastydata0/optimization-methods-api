@@ -1,0 +1,4 @@
+<map id="DatabaseConnector::userIdFromCredentials" name="DatabaseConnector::userIdFromCredentials">
+<area shape="rect" id="node1" title="Получение ID пользователя по логину и паролю." alt="" coords="204,5,373,47"/>
+<area shape="rect" id="node2" href="$classHttpServerHandler.html#af01e990d56cdeb156ec54d997dc6051e" title=" " alt="" coords="5,5,156,47"/>
+</map>
