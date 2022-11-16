@@ -1,0 +1,5 @@
+<map id="HttpServerHandler::serverStarted" name="HttpServerHandler::serverStarted">
+<area shape="rect" id="node1" title="Вызывается после успешного запуска сервера" alt="" coords="307,5,457,47"/>
+<area shape="rect" id="node2" href="$classHttpServerHandler.html#a7c4b39810c0e35259c4556fefc9b0c17" title="Слот для запуска сервера" alt="" coords="108,5,259,47"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
+</map>

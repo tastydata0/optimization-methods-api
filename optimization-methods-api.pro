@@ -2,6 +2,7 @@ QT -= gui
 QT += httpserver
 QT += sql
 QT += network
+QT += concurrent
 
 CONFIG += c++17 console
 CONFIG -= app_bundle

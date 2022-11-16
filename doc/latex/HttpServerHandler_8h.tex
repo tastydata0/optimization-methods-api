@@ -1,0 +1,82 @@
+\hypertarget{HttpServerHandler_8h}{}\doxysection{Файл include/\+Http\+Server\+Handler.h}
+\label{HttpServerHandler_8h}\index{include/HttpServerHandler.h@{include/HttpServerHandler.h}}
+{\ttfamily \#include $<$QObject$>$}\newline
+{\ttfamily \#include $<$QHttp\+Server$>$}\newline
+{\ttfamily \#include $<$QFile$>$}\newline
+{\ttfamily \#include $<$QSsl\+Key$>$}\newline
+{\ttfamily \#include $<$QSsl\+Configuration$>$}\newline
+{\ttfamily \#include \char`\"{}include/\+Database\+Connector.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}include/\+Dichotomy\+Solver.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}qjsonobject.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Qt\+Concurrent$>$}\newline
+Граф включаемых заголовочных файлов для Http\+Server\+Handler.\+h\+:
+% FIG 0
+Граф файлов, в которые включается этот файл\+:
+% FIG 1
+\doxysubsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classHttpServerHandler}{Http\+Server\+Handler}}
+\begin{DoxyCompactList}\small\item\em Класс, управляющий классом QHttp\+Server, обрабатывающий входящие запросы. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Макросы}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_a9fd2225ce234ea0d188f2580a0e6c855}{path\+To\+Certificate}}~\char`\"{}\+:/certificate.\+pem\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_ade7c0af3552ac24083d08b0ab9e2efcf}{path\+To\+Private\+Key}}~\char`\"{}\+:/privatekey.\+key\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_a97c9ff32b214f6af2c2ec60010001398}{path\+To\+Register\+Page}}~\char`\"{}\+:/register.\+html\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_aed8545e9d17cd55ed1733712f5f2f023}{path\+To\+Token\+Page}}~\char`\"{}\+:/token.\+html\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_a9f1155e39270207829ba63cfa174508f}{path\+To\+Login\+Page}}~\char`\"{}\+:/login.\+html\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_aab1b3d3576c2a6be93afaf5cda78d546}{path\+To\+User\+Not\+Found\+Page}}~\char`\"{}\+:/user\+\_\+not\+\_\+found.\+html\char`\"{}
+\item 
+\#define \mbox{\hyperlink{HttpServerHandler_8h_a3544d91a9daed2642860cd91b5f9f687}{internal\+Error\+Response}}~QHttp\+Server\+Response(\char`\"{}Internal error\char`\"{}, QHttp\+Server\+Response\+::\+Status\+Code\+::\+Internal\+Server\+Error)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Макросы}
+\mbox{\Hypertarget{HttpServerHandler_8h_a3544d91a9daed2642860cd91b5f9f687}\label{HttpServerHandler_8h_a3544d91a9daed2642860cd91b5f9f687}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!internalErrorResponse@{internalErrorResponse}}
+\index{internalErrorResponse@{internalErrorResponse}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{internalErrorResponse}{internalErrorResponse}}
+{\footnotesize\ttfamily \#define internal\+Error\+Response~QHttp\+Server\+Response(\char`\"{}Internal error\char`\"{}, QHttp\+Server\+Response\+::\+Status\+Code\+::\+Internal\+Server\+Error)}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_a9fd2225ce234ea0d188f2580a0e6c855}\label{HttpServerHandler_8h_a9fd2225ce234ea0d188f2580a0e6c855}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToCertificate@{pathToCertificate}}
+\index{pathToCertificate@{pathToCertificate}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToCertificate}{pathToCertificate}}
+{\footnotesize\ttfamily \#define path\+To\+Certificate~\char`\"{}\+:/certificate.\+pem\char`\"{}}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_a9f1155e39270207829ba63cfa174508f}\label{HttpServerHandler_8h_a9f1155e39270207829ba63cfa174508f}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToLoginPage@{pathToLoginPage}}
+\index{pathToLoginPage@{pathToLoginPage}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToLoginPage}{pathToLoginPage}}
+{\footnotesize\ttfamily \#define path\+To\+Login\+Page~\char`\"{}\+:/login.\+html\char`\"{}}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_ade7c0af3552ac24083d08b0ab9e2efcf}\label{HttpServerHandler_8h_ade7c0af3552ac24083d08b0ab9e2efcf}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToPrivateKey@{pathToPrivateKey}}
+\index{pathToPrivateKey@{pathToPrivateKey}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToPrivateKey}{pathToPrivateKey}}
+{\footnotesize\ttfamily \#define path\+To\+Private\+Key~\char`\"{}\+:/privatekey.\+key\char`\"{}}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_a97c9ff32b214f6af2c2ec60010001398}\label{HttpServerHandler_8h_a97c9ff32b214f6af2c2ec60010001398}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToRegisterPage@{pathToRegisterPage}}
+\index{pathToRegisterPage@{pathToRegisterPage}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToRegisterPage}{pathToRegisterPage}}
+{\footnotesize\ttfamily \#define path\+To\+Register\+Page~\char`\"{}\+:/register.\+html\char`\"{}}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_aed8545e9d17cd55ed1733712f5f2f023}\label{HttpServerHandler_8h_aed8545e9d17cd55ed1733712f5f2f023}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToTokenPage@{pathToTokenPage}}
+\index{pathToTokenPage@{pathToTokenPage}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToTokenPage}{pathToTokenPage}}
+{\footnotesize\ttfamily \#define path\+To\+Token\+Page~\char`\"{}\+:/token.\+html\char`\"{}}
+
+\mbox{\Hypertarget{HttpServerHandler_8h_aab1b3d3576c2a6be93afaf5cda78d546}\label{HttpServerHandler_8h_aab1b3d3576c2a6be93afaf5cda78d546}} 
+\index{HttpServerHandler.h@{HttpServerHandler.h}!pathToUserNotFoundPage@{pathToUserNotFoundPage}}
+\index{pathToUserNotFoundPage@{pathToUserNotFoundPage}!HttpServerHandler.h@{HttpServerHandler.h}}
+\doxysubsubsection{\texorpdfstring{pathToUserNotFoundPage}{pathToUserNotFoundPage}}
+{\footnotesize\ttfamily \#define path\+To\+User\+Not\+Found\+Page~\char`\"{}\+:/user\+\_\+not\+\_\+found.\+html\char`\"{}}
+

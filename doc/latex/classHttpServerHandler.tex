@@ -1,0 +1,160 @@
+\hypertarget{classHttpServerHandler}{}\doxysection{Класс Http\+Server\+Handler}
+\label{classHttpServerHandler}\index{HttpServerHandler@{HttpServerHandler}}
+
+
+Класс, управляющий классом QHttp\+Server, обрабатывающий входящие запросы.  
+
+
+
+
+{\ttfamily \#include $<$Http\+Server\+Handler.\+h$>$}
+
+
+
+Граф наследования\+:Http\+Server\+Handler\+:
+% FIG 0
+
+
+Граф связей класса Http\+Server\+Handler\+:
+% FIG 1
+\doxysubsection*{Открытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHttpServerHandler_a7c4b39810c0e35259c4556fefc9b0c17}{start\+Server}} ()
+\begin{DoxyCompactList}\small\item\em Слот для запуска сервера \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHttpServerHandler_a37b8dfc4a11babb100949936c347d94b}{server\+Started}} ()
+\begin{DoxyCompactList}\small\item\em Вызывается после успешного запуска сервера \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHttpServerHandler_af01e990d56cdeb156ec54d997dc6051e}{Http\+Server\+Handler}} (QThread\+Pool $\ast$database\+Pool, QObject $\ast$parent=nullptr)
+\item 
+short \mbox{\hyperlink{classHttpServerHandler_a97b111c19916875921c5055c65db4558}{get\+Server\+Port}} () const
+\item 
+void \mbox{\hyperlink{classHttpServerHandler_a6e60895359c378e6457a7bab454d6919}{set\+Server\+Port}} (short new\+Server\+Port)
+\item 
+bool \mbox{\hyperlink{classHttpServerHandler_a7420875c3855b3d70a94d3b704d5b327}{set\+Ssl\+Certificate}} (const QString \&path, QSsl\+::\+Encoding\+Format format=QSsl\+::\+Pem)
+\begin{DoxyCompactList}\small\item\em Установка сертификата из файла. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classHttpServerHandler_ae88aee28e5879d03d6f873efe181c0e9}{set\+Ssl\+Private\+Key}} (const QString \&path, const QByte\+Array \&password=QByte\+Array(), QSsl\+::\+Key\+Algorithm algorithm=QSsl\+::\+Rsa, QSsl\+::\+Encoding\+Format format=QSsl\+::\+Pem)
+\begin{DoxyCompactList}\small\item\em Установка приватного ключа из файла. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static const QHttp\+Server\+Response \& \mbox{\hyperlink{classHttpServerHandler_a5b7e39ba8815cc3d5776b0e9496af1c5}{get\+Internal\+Error\+Response}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, управляющий классом QHttp\+Server, обрабатывающий входящие запросы. 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classHttpServerHandler_af01e990d56cdeb156ec54d997dc6051e}\label{classHttpServerHandler_af01e990d56cdeb156ec54d997dc6051e}} 
+\index{HttpServerHandler@{HttpServerHandler}!HttpServerHandler@{HttpServerHandler}}
+\index{HttpServerHandler@{HttpServerHandler}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{HttpServerHandler()}{HttpServerHandler()}}
+{\footnotesize\ttfamily Http\+Server\+Handler\+::\+Http\+Server\+Handler (\begin{DoxyParamCaption}\item[{QThread\+Pool $\ast$}]{database\+Pool,  }\item[{QObject $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Граф вызовов\+:
+% FIG 2
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classHttpServerHandler_a5b7e39ba8815cc3d5776b0e9496af1c5}\label{classHttpServerHandler_a5b7e39ba8815cc3d5776b0e9496af1c5}} 
+\index{HttpServerHandler@{HttpServerHandler}!getInternalErrorResponse@{getInternalErrorResponse}}
+\index{getInternalErrorResponse@{getInternalErrorResponse}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{getInternalErrorResponse()}{getInternalErrorResponse()}}
+{\footnotesize\ttfamily static const QHttp\+Server\+Response \& Http\+Server\+Handler\+::get\+Internal\+Error\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classHttpServerHandler_a97b111c19916875921c5055c65db4558}\label{classHttpServerHandler_a97b111c19916875921c5055c65db4558}} 
+\index{HttpServerHandler@{HttpServerHandler}!getServerPort@{getServerPort}}
+\index{getServerPort@{getServerPort}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{getServerPort()}{getServerPort()}}
+{\footnotesize\ttfamily short Http\+Server\+Handler\+::get\+Server\+Port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classHttpServerHandler_a37b8dfc4a11babb100949936c347d94b}\label{classHttpServerHandler_a37b8dfc4a11babb100949936c347d94b}} 
+\index{HttpServerHandler@{HttpServerHandler}!serverStarted@{serverStarted}}
+\index{serverStarted@{serverStarted}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{serverStarted}{serverStarted}}
+{\footnotesize\ttfamily void Http\+Server\+Handler\+::server\+Started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Вызывается после успешного запуска сервера 
+
+Граф вызова функции\+:
+% FIG 3
+\mbox{\Hypertarget{classHttpServerHandler_a6e60895359c378e6457a7bab454d6919}\label{classHttpServerHandler_a6e60895359c378e6457a7bab454d6919}} 
+\index{HttpServerHandler@{HttpServerHandler}!setServerPort@{setServerPort}}
+\index{setServerPort@{setServerPort}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{setServerPort()}{setServerPort()}}
+{\footnotesize\ttfamily void Http\+Server\+Handler\+::set\+Server\+Port (\begin{DoxyParamCaption}\item[{short}]{new\+Server\+Port }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHttpServerHandler_a7420875c3855b3d70a94d3b704d5b327}\label{classHttpServerHandler_a7420875c3855b3d70a94d3b704d5b327}} 
+\index{HttpServerHandler@{HttpServerHandler}!setSslCertificate@{setSslCertificate}}
+\index{setSslCertificate@{setSslCertificate}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{setSslCertificate()}{setSslCertificate()}}
+{\footnotesize\ttfamily bool Http\+Server\+Handler\+::set\+Ssl\+Certificate (\begin{DoxyParamCaption}\item[{const QString \&}]{path,  }\item[{QSsl\+::\+Encoding\+Format}]{format = {\ttfamily QSsl\+:\+:Pem} }\end{DoxyParamCaption})}
+
+
+
+Установка сертификата из файла. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em path} & -\/ Путь к файлу приватного ключа. \\
+\hline
+{\em format} & -\/ Формат кодирования ключа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+true при успешном присваивании, false при ошибке. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 4
+\mbox{\Hypertarget{classHttpServerHandler_ae88aee28e5879d03d6f873efe181c0e9}\label{classHttpServerHandler_ae88aee28e5879d03d6f873efe181c0e9}} 
+\index{HttpServerHandler@{HttpServerHandler}!setSslPrivateKey@{setSslPrivateKey}}
+\index{setSslPrivateKey@{setSslPrivateKey}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{setSslPrivateKey()}{setSslPrivateKey()}}
+{\footnotesize\ttfamily bool Http\+Server\+Handler\+::set\+Ssl\+Private\+Key (\begin{DoxyParamCaption}\item[{const QString \&}]{path,  }\item[{const QByte\+Array \&}]{password = {\ttfamily QByteArray()},  }\item[{QSsl\+::\+Key\+Algorithm}]{algorithm = {\ttfamily QSsl\+:\+:Rsa},  }\item[{QSsl\+::\+Encoding\+Format}]{format = {\ttfamily QSsl\+:\+:Pem} }\end{DoxyParamCaption})}
+
+
+
+Установка приватного ключа из файла. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em path} & -\/ Путь к файлу приватного ключа. \\
+\hline
+{\em password} & -\/ Пароль приватного ключа. \\
+\hline
+{\em algorithm} & -\/ Алгоритм приватного ключа. \\
+\hline
+{\em format} & -\/ Формат кодирования ключа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+true при успешном присваивании, false при ошибке. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 5
+\mbox{\Hypertarget{classHttpServerHandler_a7c4b39810c0e35259c4556fefc9b0c17}\label{classHttpServerHandler_a7c4b39810c0e35259c4556fefc9b0c17}} 
+\index{HttpServerHandler@{HttpServerHandler}!startServer@{startServer}}
+\index{startServer@{startServer}!HttpServerHandler@{HttpServerHandler}}
+\doxysubsubsection{\texorpdfstring{startServer}{startServer}}
+{\footnotesize\ttfamily void Http\+Server\+Handler\+::start\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Слот для запуска сервера 
+
+Граф вызова функции\+:
+% FIG 6
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{HttpServerHandler_8h}{Http\+Server\+Handler.\+h}}\item 
+src/\mbox{\hyperlink{HttpServerHandler_8cpp}{Http\+Server\+Handler.\+cpp}}\end{DoxyCompactItemize}

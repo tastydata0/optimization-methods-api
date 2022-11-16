@@ -6,14 +6,14 @@ DichotomySolver::DichotomySolver(QObject *parent)
 
 }
 
-QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
+QJsonDocument DichotomySolver::solve(const QHash<QString, QString> input)
 {
     QString program = "python";
 
     QStringList arguments;
     arguments << "scripts/dichotomy.py"
-              << input["left-bound"]
-              << input["right-bound"]
+              << input["left_bound"]
+              << input["right_bound"]
               << input["function"]
               << input["e"]
               << input["l0"]
@@ -22,10 +22,22 @@ QJsonDocument DichotomySolver::solve(const QHash<QString, QString> &input)
     QProcess process;
     process.start(program, arguments);
 
-    QByteArray data = {"\"status\": \"fail\""};
+    QByteArray data;
     if (process.waitForFinished()) {
         data = process.readAllStandardOutput();
     }
+    process.close();
 
-    return QJsonDocument::fromJson(data);
+    QJsonParseError error;
+    QJsonDocument output = QJsonDocument::fromJson(data, &error);
+
+    if(error.error == QJsonParseError::NoError) {
+        return output;
+    }
+    else {
+        return QJsonDocument::fromJson("{\"success\": false, \"error\": \"Internal error\"}");
+    }
+
+
+
 }

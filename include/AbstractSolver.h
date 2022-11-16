@@ -32,7 +32,7 @@ public:
     /// \return Возвращает QJsonDocument с данными о решении задачи.
     /// В нем всегда есть поле "status", где отображено, было ли решение успешным или произошла ошибка.
     ///
-    virtual QJsonDocument solve(const QHash<QString, QString> &input) = 0;
+    virtual QJsonDocument solve(const QHash<QString, QString> input) = 0;
 
 signals:
 

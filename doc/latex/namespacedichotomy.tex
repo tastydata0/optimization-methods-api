@@ -1,0 +1,166 @@
+\hypertarget{namespacedichotomy}{}\doxysection{Пространство имен dichotomy}
+\label{namespacedichotomy}\index{dichotomy@{dichotomy}}
+\doxysubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{f}} (x)
+\end{DoxyCompactItemize}
+\doxysubsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{L0\+\_\+lower}} = float(argv\mbox{[}1\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{L0\+\_\+upper}} = float(argv\mbox{[}2\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a8c8313869afeffa3f9299af18d8c8ec8}{function}} = argv\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}} = float(argv\mbox{[}4\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}{l0}} = float(argv\mbox{[}5\mbox{]})
+\item 
+\mbox{\hyperlink{namespacedichotomy_aef82219f7ae32b78fc92553b6dc4937d}{target}} = argv\mbox{[}6\mbox{]}.lower()
+\item 
+string \mbox{\hyperlink{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}{FIND\+\_\+\+MAX}} = \textquotesingle{}max\textquotesingle{}
+\item 
+dictionary \mbox{\hyperlink{namespacedichotomy_aa6155e87a22d88d9c5ad27c056c4ac93}{output\+\_\+json}} = \{\}
+\item 
+int \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}} = 12
+\item 
+list \mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{L}} = \mbox{[}\mbox{[}\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{L0\+\_\+lower}}, \mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{L0\+\_\+upper}}\mbox{]}\mbox{]}
+\item 
+tuple \mbox{\hyperlink{namespacedichotomy_afb5cb3c837db3e86634e3eec82998b2f}{n}} = (2/log(2)) $\ast$ log((\mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{L0\+\_\+upper}}-\/\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{L0\+\_\+lower}} -\/ \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}})/(\mbox{\hyperlink{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}{l0}}-\/\mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}))
+\item 
+int \mbox{\hyperlink{namespacedichotomy_ad47fbe22a5dbb4076e6edce212b61ea6}{x\+\_\+best}} = 0
+\item 
+string \mbox{\hyperlink{namespacedichotomy_ac23b983bb071e251313967e293196a2e}{f\+\_\+best}} = float(\textquotesingle{}-\/inf\textquotesingle{}) if \mbox{\hyperlink{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}{FIND\+\_\+\+MAX}} else float(\textquotesingle{}inf\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{mid}} = round((\mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{L}}\mbox{[}-\/1\mbox{]}\mbox{[}1\mbox{]} + \mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{L}}\mbox{[}-\/1\mbox{]}\mbox{[}0\mbox{]})/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})
+\item 
+\mbox{\hyperlink{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}{x\+\_\+left}} = round(\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{mid}} -\/ \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}{x\+\_\+right}} = round(\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{mid}} + \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})
+\item 
+\mbox{\hyperlink{namespacedichotomy_a499d83b1924022a2a97de2f616daf506}{f\+\_\+left}} = round(\mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{f}}(\mbox{\hyperlink{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}{x\+\_\+left}}), \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})
+\item 
+\mbox{\hyperlink{namespacedichotomy_ad02fd0bd95520ece8c6cce2cf8b7a1cc}{f\+\_\+right}} = round(\mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{f}}(\mbox{\hyperlink{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}{x\+\_\+right}}), \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Функции}
+\mbox{\Hypertarget{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}\label{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}} 
+\index{dichotomy@{dichotomy}!f@{f}}
+\index{f@{f}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{f()}{f()}}
+{\footnotesize\ttfamily def dichotomy.\+f (\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Переменные}
+\mbox{\Hypertarget{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}\label{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}} 
+\index{dichotomy@{dichotomy}!E@{E}}
+\index{E@{E}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily dichotomy.\+E = float(argv\mbox{[}4\mbox{]})}
+
+\mbox{\Hypertarget{namespacedichotomy_ac23b983bb071e251313967e293196a2e}\label{namespacedichotomy_ac23b983bb071e251313967e293196a2e}} 
+\index{dichotomy@{dichotomy}!f\_best@{f\_best}}
+\index{f\_best@{f\_best}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{f\_best}{f\_best}}
+{\footnotesize\ttfamily dichotomy.\+f\+\_\+best = float(\textquotesingle{}-\/inf\textquotesingle{}) if \mbox{\hyperlink{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}{FIND\+\_\+\+MAX}} else float(\textquotesingle{}inf\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacedichotomy_a499d83b1924022a2a97de2f616daf506}\label{namespacedichotomy_a499d83b1924022a2a97de2f616daf506}} 
+\index{dichotomy@{dichotomy}!f\_left@{f\_left}}
+\index{f\_left@{f\_left}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{f\_left}{f\_left}}
+{\footnotesize\ttfamily dichotomy.\+f\+\_\+left = round(\mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{f}}(\mbox{\hyperlink{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}{x\+\_\+left}}), \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})}
+
+\mbox{\Hypertarget{namespacedichotomy_ad02fd0bd95520ece8c6cce2cf8b7a1cc}\label{namespacedichotomy_ad02fd0bd95520ece8c6cce2cf8b7a1cc}} 
+\index{dichotomy@{dichotomy}!f\_right@{f\_right}}
+\index{f\_right@{f\_right}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{f\_right}{f\_right}}
+{\footnotesize\ttfamily dichotomy.\+f\+\_\+right = round(\mbox{\hyperlink{namespacedichotomy_af34d40165b5ae2b15de26dcad097d900}{f}}(\mbox{\hyperlink{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}{x\+\_\+right}}), \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})}
+
+\mbox{\Hypertarget{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}\label{namespacedichotomy_afe7f7429002c7e030afa0a9b92c0b109}} 
+\index{dichotomy@{dichotomy}!FIND\_MAX@{FIND\_MAX}}
+\index{FIND\_MAX@{FIND\_MAX}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{FIND\_MAX}{FIND\_MAX}}
+{\footnotesize\ttfamily string dichotomy.\+FIND\+\_\+\+MAX = \textquotesingle{}max\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacedichotomy_a8c8313869afeffa3f9299af18d8c8ec8}\label{namespacedichotomy_a8c8313869afeffa3f9299af18d8c8ec8}} 
+\index{dichotomy@{dichotomy}!function@{function}}
+\index{function@{function}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{function}{function}}
+{\footnotesize\ttfamily dichotomy.\+function = argv\mbox{[}3\mbox{]}}
+
+\mbox{\Hypertarget{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}\label{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}} 
+\index{dichotomy@{dichotomy}!L@{L}}
+\index{L@{L}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily list dichotomy.\+L = \mbox{[}\mbox{[}\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{L0\+\_\+lower}}, \mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{L0\+\_\+upper}}\mbox{]}\mbox{]}}
+
+\mbox{\Hypertarget{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}\label{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}} 
+\index{dichotomy@{dichotomy}!l0@{l0}}
+\index{l0@{l0}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{l0}{l0}}
+{\footnotesize\ttfamily dichotomy.\+l0 = float(argv\mbox{[}5\mbox{]})}
+
+\mbox{\Hypertarget{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}\label{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}} 
+\index{dichotomy@{dichotomy}!L0\_lower@{L0\_lower}}
+\index{L0\_lower@{L0\_lower}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{L0\_lower}{L0\_lower}}
+{\footnotesize\ttfamily dichotomy.\+L0\+\_\+lower = float(argv\mbox{[}1\mbox{]})}
+
+\mbox{\Hypertarget{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}\label{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}} 
+\index{dichotomy@{dichotomy}!L0\_upper@{L0\_upper}}
+\index{L0\_upper@{L0\_upper}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{L0\_upper}{L0\_upper}}
+{\footnotesize\ttfamily dichotomy.\+L0\+\_\+upper = float(argv\mbox{[}2\mbox{]})}
+
+\mbox{\Hypertarget{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}\label{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}} 
+\index{dichotomy@{dichotomy}!mid@{mid}}
+\index{mid@{mid}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{mid}{mid}}
+{\footnotesize\ttfamily dichotomy.\+mid = round((\mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{L}}\mbox{[}-\/1\mbox{]}\mbox{[}1\mbox{]} + \mbox{\hyperlink{namespacedichotomy_ae047f9afc44b5d0a4738e7a9ce098d32}{L}}\mbox{[}-\/1\mbox{]}\mbox{[}0\mbox{]})/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})}
+
+\mbox{\Hypertarget{namespacedichotomy_afb5cb3c837db3e86634e3eec82998b2f}\label{namespacedichotomy_afb5cb3c837db3e86634e3eec82998b2f}} 
+\index{dichotomy@{dichotomy}!n@{n}}
+\index{n@{n}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int dichotomy.\+n = (2/log(2)) $\ast$ log((\mbox{\hyperlink{namespacedichotomy_a31257c5f7a5ef6b10378fc5d72b22fe0}{L0\+\_\+upper}}-\/\mbox{\hyperlink{namespacedichotomy_a36fd0c5dded8893afa0059bdb2a3d8dc}{L0\+\_\+lower}} -\/ \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}})/(\mbox{\hyperlink{namespacedichotomy_a2c4060cc78c1395e3fe9a80a07de0a19}{l0}}-\/\mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}))}
+
+\mbox{\Hypertarget{namespacedichotomy_aa6155e87a22d88d9c5ad27c056c4ac93}\label{namespacedichotomy_aa6155e87a22d88d9c5ad27c056c4ac93}} 
+\index{dichotomy@{dichotomy}!output\_json@{output\_json}}
+\index{output\_json@{output\_json}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{output\_json}{output\_json}}
+{\footnotesize\ttfamily dictionary dichotomy.\+output\+\_\+json = \{\}}
+
+\mbox{\Hypertarget{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}\label{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}} 
+\index{dichotomy@{dichotomy}!ROUND\_PRECISION@{ROUND\_PRECISION}}
+\index{ROUND\_PRECISION@{ROUND\_PRECISION}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{ROUND\_PRECISION}{ROUND\_PRECISION}}
+{\footnotesize\ttfamily int dichotomy.\+ROUND\+\_\+\+PRECISION = 12}
+
+\mbox{\Hypertarget{namespacedichotomy_aef82219f7ae32b78fc92553b6dc4937d}\label{namespacedichotomy_aef82219f7ae32b78fc92553b6dc4937d}} 
+\index{dichotomy@{dichotomy}!target@{target}}
+\index{target@{target}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily dichotomy.\+target = argv\mbox{[}6\mbox{]}.lower()}
+
+\mbox{\Hypertarget{namespacedichotomy_ad47fbe22a5dbb4076e6edce212b61ea6}\label{namespacedichotomy_ad47fbe22a5dbb4076e6edce212b61ea6}} 
+\index{dichotomy@{dichotomy}!x\_best@{x\_best}}
+\index{x\_best@{x\_best}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{x\_best}{x\_best}}
+{\footnotesize\ttfamily dichotomy.\+x\+\_\+best = 0}
+
+\mbox{\Hypertarget{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}\label{namespacedichotomy_ad56ad0a0b7f18cea00079429580e6e45}} 
+\index{dichotomy@{dichotomy}!x\_left@{x\_left}}
+\index{x\_left@{x\_left}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{x\_left}{x\_left}}
+{\footnotesize\ttfamily dichotomy.\+x\+\_\+left = round(\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{mid}} -\/ \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})}
+
+\mbox{\Hypertarget{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}\label{namespacedichotomy_a19b8f668699dbf459d360c02b47d6a4b}} 
+\index{dichotomy@{dichotomy}!x\_right@{x\_right}}
+\index{x\_right@{x\_right}!dichotomy@{dichotomy}}
+\doxysubsubsection{\texorpdfstring{x\_right}{x\_right}}
+{\footnotesize\ttfamily dichotomy.\+x\+\_\+right = round(\mbox{\hyperlink{namespacedichotomy_a03902f8b9cc6a350f2cfdd714f0b4d18}{mid}} + \mbox{\hyperlink{namespacedichotomy_aea0e030bf0d2b936663786eb6584a421}{E}}/2, \mbox{\hyperlink{namespacedichotomy_aed0b94a3d3421e61796874d46baf8386}{ROUND\+\_\+\+PRECISION}})}
+

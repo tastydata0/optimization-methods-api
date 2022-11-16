@@ -1,0 +1,7 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,80,83"/>
+<area shape="rect" id="node2" href="$classAbstractSolver.html" title="Класс, абстрагирующий решение задачи." alt="" coords="145,5,262,32"/>
+<area shape="rect" id="node4" href="$classDatabaseConnector.html" title="Класс, работающий с БД, инкапсулируя SQL&#45;запросы" alt="" coords="128,56,279,83"/>
+<area shape="rect" id="node5" href="$classHttpServerHandler.html" title="Класс, управляющий классом QHttpServer, обрабатывающий входящие запросы." alt="" coords="132,107,275,133"/>
+<area shape="rect" id="node3" href="$classDichotomySolver.html" title="Наследник AbstractSolver, решающий задачу поиска минимума/максимума методом дихотомии." alt="" coords="327,5,461,32"/>
+</map>

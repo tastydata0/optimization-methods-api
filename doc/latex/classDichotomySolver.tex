@@ -1,0 +1,69 @@
+\hypertarget{classDichotomySolver}{}\doxysection{Класс Dichotomy\+Solver}
+\label{classDichotomySolver}\index{DichotomySolver@{DichotomySolver}}
+
+
+Наследник \mbox{\hyperlink{classAbstractSolver}{Abstract\+Solver}}, решающий задачу поиска минимума/максимума методом дихотомии.  
+
+
+
+
+{\ttfamily \#include $<$Dichotomy\+Solver.\+h$>$}
+
+
+
+Граф наследования\+:Dichotomy\+Solver\+:
+% FIG 0
+
+
+Граф связей класса Dichotomy\+Solver\+:
+% FIG 1
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDichotomySolver_ab978d6b6229119399147c2195a3b43ad}{Dichotomy\+Solver}} (QObject $\ast$parent=nullptr)
+\item 
+virtual QJson\+Document \mbox{\hyperlink{classDichotomySolver_a301b9669d7128bfd8298723ac4d8d3b7}{solve}} (const QHash$<$ QString, QString $>$ input) override
+\begin{DoxyCompactList}\small\item\em Реализация функции, унаследованной от \mbox{\hyperlink{classAbstractSolver}{Abstract\+Solver}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Наследник \mbox{\hyperlink{classAbstractSolver}{Abstract\+Solver}}, решающий задачу поиска минимума/максимума методом дихотомии. 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classDichotomySolver_ab978d6b6229119399147c2195a3b43ad}\label{classDichotomySolver_ab978d6b6229119399147c2195a3b43ad}} 
+\index{DichotomySolver@{DichotomySolver}!DichotomySolver@{DichotomySolver}}
+\index{DichotomySolver@{DichotomySolver}!DichotomySolver@{DichotomySolver}}
+\doxysubsubsection{\texorpdfstring{DichotomySolver()}{DichotomySolver()}}
+{\footnotesize\ttfamily Dichotomy\+Solver\+::\+Dichotomy\+Solver (\begin{DoxyParamCaption}\item[{QObject $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classDichotomySolver_a301b9669d7128bfd8298723ac4d8d3b7}\label{classDichotomySolver_a301b9669d7128bfd8298723ac4d8d3b7}} 
+\index{DichotomySolver@{DichotomySolver}!solve@{solve}}
+\index{solve@{solve}!DichotomySolver@{DichotomySolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily QJson\+Document Dichotomy\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const QHash$<$ QString, QString $>$}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Реализация функции, унаследованной от \mbox{\hyperlink{classAbstractSolver}{Abstract\+Solver}}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em input} & -\/ QHash с необходимыми ключами и корректными значениями в виде QString. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возвращает QJson\+Document с данными о решении задачи. В нем всегда есть поле типа bool \char`\"{}success\char`\"{}, где отображено, было ли решение успешным или произошла ошибка. 
+\end{DoxyReturn}
+
+
+Замещает \mbox{\hyperlink{classAbstractSolver_a77a5124d604b8d9b03ce8f15bdae800c}{Abstract\+Solver}}.
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{DichotomySolver_8h}{Dichotomy\+Solver.\+h}}\item 
+src/\mbox{\hyperlink{DichotomySolver_8cpp}{Dichotomy\+Solver.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,67 @@
+\hypertarget{HttpServerHandler_8h_source}{}\doxysection{Http\+Server\+Handler.\+h}
+\label{HttpServerHandler_8h_source}\index{include/HttpServerHandler.h@{include/HttpServerHandler.h}}
+\mbox{\hyperlink{HttpServerHandler_8h}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef HTTPSERVERHANDLER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define HTTPSERVERHANDLER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QHttpServer>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QFile>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QSslKey>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QSslConfiguration>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{DatabaseConnector_8h}{include/DatabaseConnector.h}}"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{DichotomySolver_8h}{include/DichotomySolver.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}qjsonobject.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <QtConcurrent>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define pathToCertificate "{}:/certificate.pem"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define pathToPrivateKey "{}:/privatekey.key"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define pathToRegisterPage "{}:/register.html"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define pathToTokenPage "{}:/token.html"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define pathToLoginPage "{}:/login.html"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define pathToUserNotFoundPage "{}:/user\_not\_found.html"{}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define internalErrorResponse QHttpServerResponse("{}Internal error"{}}, QHttpServerResponse::StatusCode::InternalServerError)}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{classHttpServerHandler}{HttpServerHandler}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     Q\_OBJECT}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \textcolor{keyword}{explicit} \mbox{\hyperlink{classHttpServerHandler_af01e990d56cdeb156ec54d997dc6051e}{HttpServerHandler}}(QThreadPool *databasePool, QObject *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{short} \mbox{\hyperlink{classHttpServerHandler_a97b111c19916875921c5055c65db4558}{getServerPort}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{34     \textcolor{keywordtype}{void} \mbox{\hyperlink{classHttpServerHandler_a6e60895359c378e6457a7bab454d6919}{setServerPort}}(\textcolor{keywordtype}{short} newServerPort);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classHttpServerHandler_a7420875c3855b3d70a94d3b704d5b327}{setSslCertificate}}(\textcolor{keyword}{const} QString\& path, QSsl::EncodingFormat format = QSsl::Pem);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classHttpServerHandler_ae88aee28e5879d03d6f873efe181c0e9}{setSslPrivateKey}}(\textcolor{keyword}{const} QString\& path, \textcolor{keyword}{const} QByteArray\& password = QByteArray(), QSsl::KeyAlgorithm algorithm = QSsl::Rsa, QSsl::EncodingFormat format = QSsl::Pem);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{static} \textcolor{keyword}{const} QHttpServerResponse \&\mbox{\hyperlink{classHttpServerHandler_a5b7e39ba8815cc3d5776b0e9496af1c5}{getInternalErrorResponse}}();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{private}:}
+\DoxyCodeLine{57     QHttpServer server;}
+\DoxyCodeLine{58     \mbox{\hyperlink{classDichotomySolver}{DichotomySolver}} solver;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     QThreadPool *databaseConnectionsPool;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     QSslCertificate sslCertificate;}
+\DoxyCodeLine{63     QSslKey sslPrivateKey;}
+\DoxyCodeLine{64     \textcolor{keywordtype}{short} serverPort = 8080;}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{72     \textcolor{keyword}{template}<\textcolor{keyword}{class} Solver>}
+\DoxyCodeLine{73     QFuture<QHttpServerResponse> processRequest(\textcolor{keyword}{const} QHttpServerRequest \&request);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 signals:}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{classHttpServerHandler_a37b8dfc4a11babb100949936c347d94b}{serverStarted}}();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} \mbox{\hyperlink{classHttpServerHandler_a7c4b39810c0e35259c4556fefc9b0c17}{startServer}}();}
+\DoxyCodeLine{89 \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// HTTPSERVERHANDLER\_H}}
+
+\end{DoxyCode}

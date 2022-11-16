@@ -1,0 +1,254 @@
+\hypertarget{classDatabaseConnector}{}\doxysection{Класс Database\+Connector}
+\label{classDatabaseConnector}\index{DatabaseConnector@{DatabaseConnector}}
+
+
+Класс, работающий с БД, инкапсулируя SQL-\/запросы  
+
+
+
+
+{\ttfamily \#include $<$Database\+Connector.\+h$>$}
+
+
+
+Граф наследования\+:Database\+Connector\+:
+% FIG 0
+
+
+Граф связей класса Database\+Connector\+:
+% FIG 1
+\doxysubsection*{Открытые типы}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{REGISTER\+\_\+\+USER\+\_\+\+RESULT}} \{ \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae0aa021e21dddbd6d8cecec71e9cf564}{OK}}
+, \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550abb996a531afec7056344afa3e69092cc}{USER\+\_\+\+EXISTS}}
+, \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae8c0c70879b5895c615677261d64a1ee}{INTERNAL\+\_\+\+ERROR}}
+ \}
+\item 
+enum class \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258e}{TOKEN\+\_\+\+CHECK\+\_\+\+RESULT}} \{ \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae0aa021e21dddbd6d8cecec71e9cf564}{OK}}
+, \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eafada8c00c8340d5aca278d054a54a9c9}{OUT\+\_\+\+OF\+\_\+\+QUOTA}}
+, \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae4016c2451222999836eb27bb5122720}{TOKEN\+\_\+\+NOT\+\_\+\+FOUND}}
+, \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae8c0c70879b5895c615677261d64a1ee}{INTERNAL\+\_\+\+ERROR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classDatabaseConnector_aa1aa6d6e4c67b2b3b61a598cc801805f}{connect}} ()
+\begin{DoxyCompactList}\small\item\em Подключение к БД, используя данные из database\+\_\+secrets.\+ini. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDatabaseConnector_a3e5a7533877956070312220d98322587}{disconnect}} ()
+\begin{DoxyCompactList}\small\item\em Отключение от БД. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDatabaseConnector_a6abcd3330347a660d0a96400bd69da0f}{Database\+Connector}} (QObject $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{REGISTER\+\_\+\+USER\+\_\+\+RESULT}} \mbox{\hyperlink{classDatabaseConnector_adf414a7a9003a9e5b4ec4b7b587894e4}{register\+User}} (const QString \&username, const QString \&password)
+\begin{DoxyCompactList}\small\item\em Регистрация пользователя. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDatabaseConnector_a2bbef4d1745a77340d0029388eae384c}{user\+Quota}} (const QString \&token)
+\begin{DoxyCompactList}\small\item\em Проверка, сколько осталось квоты у пользователя. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDatabaseConnector_a9bc6fc7f9090dcfc8e761293073b68ea}{decrease\+User\+Quota}} (const QString \&token)
+\begin{DoxyCompactList}\small\item\em уменьшение доступной квоты пользователя на 1. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDatabaseConnector_a41992ec486af63aed14f507f4873436f}{user\+Id\+From\+Credentials}} (const QString \&username, const QString \&password)
+\begin{DoxyCompactList}\small\item\em Получение ID пользователя по логину и паролю. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classDatabaseConnector_a5f5e79bbb4055bc3a0438d198fd94a11}{token\+From\+User\+Id}} (int user\+Id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Статические открытые данные}
+\begin{DoxyCompactItemize}
+\item 
+static const int \mbox{\hyperlink{classDatabaseConnector_a72eb534f34958d6de47df47e03121b2f}{MAX\+\_\+\+DATABASE\+\_\+\+CONNECTIONS\+\_\+\+COUNT}} = 5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, работающий с БД, инкапсулируя SQL-\/запросы 
+
+\doxysubsection{Перечисления}
+\mbox{\Hypertarget{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}\label{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}} 
+\index{DatabaseConnector@{DatabaseConnector}!REGISTER\_USER\_RESULT@{REGISTER\_USER\_RESULT}}
+\index{REGISTER\_USER\_RESULT@{REGISTER\_USER\_RESULT}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_USER\_RESULT}{REGISTER\_USER\_RESULT}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{Database\+Connector\+::\+REGISTER\+\_\+\+USER\+\_\+\+RESULT}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Элементы перечислений}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OK@{OK}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!OK@{OK}}}\mbox{\Hypertarget{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae0aa021e21dddbd6d8cecec71e9cf564}\label{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae0aa021e21dddbd6d8cecec71e9cf564}} 
+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{USER\_EXISTS@{USER\_EXISTS}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!USER\_EXISTS@{USER\_EXISTS}}}\mbox{\Hypertarget{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550abb996a531afec7056344afa3e69092cc}\label{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550abb996a531afec7056344afa3e69092cc}} 
+USER\+\_\+\+EXISTS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INTERNAL\_ERROR@{INTERNAL\_ERROR}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!INTERNAL\_ERROR@{INTERNAL\_ERROR}}}\mbox{\Hypertarget{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae8c0c70879b5895c615677261d64a1ee}\label{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae8c0c70879b5895c615677261d64a1ee}} 
+INTERNAL\+\_\+\+ERROR&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258e}\label{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258e}} 
+\index{DatabaseConnector@{DatabaseConnector}!TOKEN\_CHECK\_RESULT@{TOKEN\_CHECK\_RESULT}}
+\index{TOKEN\_CHECK\_RESULT@{TOKEN\_CHECK\_RESULT}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{TOKEN\_CHECK\_RESULT}{TOKEN\_CHECK\_RESULT}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258e}{Database\+Connector\+::\+TOKEN\+\_\+\+CHECK\+\_\+\+RESULT}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Элементы перечислений}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OK@{OK}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!OK@{OK}}}\mbox{\Hypertarget{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae0aa021e21dddbd6d8cecec71e9cf564}\label{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae0aa021e21dddbd6d8cecec71e9cf564}} 
+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OUT\_OF\_QUOTA@{OUT\_OF\_QUOTA}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!OUT\_OF\_QUOTA@{OUT\_OF\_QUOTA}}}\mbox{\Hypertarget{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eafada8c00c8340d5aca278d054a54a9c9}\label{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eafada8c00c8340d5aca278d054a54a9c9}} 
+OUT\+\_\+\+OF\+\_\+\+QUOTA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOKEN\_NOT\_FOUND@{TOKEN\_NOT\_FOUND}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!TOKEN\_NOT\_FOUND@{TOKEN\_NOT\_FOUND}}}\mbox{\Hypertarget{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae4016c2451222999836eb27bb5122720}\label{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae4016c2451222999836eb27bb5122720}} 
+TOKEN\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INTERNAL\_ERROR@{INTERNAL\_ERROR}!DatabaseConnector@{DatabaseConnector}}\index{DatabaseConnector@{DatabaseConnector}!INTERNAL\_ERROR@{INTERNAL\_ERROR}}}\mbox{\Hypertarget{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae8c0c70879b5895c615677261d64a1ee}\label{classDatabaseConnector_ad226b72394df04cd9ad7a7458b00258eae8c0c70879b5895c615677261d64a1ee}} 
+INTERNAL\+\_\+\+ERROR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classDatabaseConnector_a6abcd3330347a660d0a96400bd69da0f}\label{classDatabaseConnector_a6abcd3330347a660d0a96400bd69da0f}} 
+\index{DatabaseConnector@{DatabaseConnector}!DatabaseConnector@{DatabaseConnector}}
+\index{DatabaseConnector@{DatabaseConnector}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{DatabaseConnector()}{DatabaseConnector()}}
+{\footnotesize\ttfamily Database\+Connector\+::\+Database\+Connector (\begin{DoxyParamCaption}\item[{QObject $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Граф вызовов\+:
+% FIG 2
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classDatabaseConnector_aa1aa6d6e4c67b2b3b61a598cc801805f}\label{classDatabaseConnector_aa1aa6d6e4c67b2b3b61a598cc801805f}} 
+\index{DatabaseConnector@{DatabaseConnector}!connect@{connect}}
+\index{connect@{connect}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{connect}{connect}}
+{\footnotesize\ttfamily bool Database\+Connector\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Подключение к БД, используя данные из database\+\_\+secrets.\+ini. 
+
+\begin{DoxyReturn}{Возвращает}
+true, если подключение удалось, иначе false. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 3
+\mbox{\Hypertarget{classDatabaseConnector_a9bc6fc7f9090dcfc8e761293073b68ea}\label{classDatabaseConnector_a9bc6fc7f9090dcfc8e761293073b68ea}} 
+\index{DatabaseConnector@{DatabaseConnector}!decreaseUserQuota@{decreaseUserQuota}}
+\index{decreaseUserQuota@{decreaseUserQuota}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{decreaseUserQuota()}{decreaseUserQuota()}}
+{\footnotesize\ttfamily int Database\+Connector\+::decrease\+User\+Quota (\begin{DoxyParamCaption}\item[{const QString \&}]{token }\end{DoxyParamCaption})}
+
+
+
+уменьшение доступной квоты пользователя на 1. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em token} & -\/ токен пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+1, если квота есть, 0, если закончилась, -\/1 при неудаче 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDatabaseConnector_a3e5a7533877956070312220d98322587}\label{classDatabaseConnector_a3e5a7533877956070312220d98322587}} 
+\index{DatabaseConnector@{DatabaseConnector}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{disconnect}{disconnect}}
+{\footnotesize\ttfamily void Database\+Connector\+::disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Отключение от БД. 
+
+\mbox{\Hypertarget{classDatabaseConnector_adf414a7a9003a9e5b4ec4b7b587894e4}\label{classDatabaseConnector_adf414a7a9003a9e5b4ec4b7b587894e4}} 
+\index{DatabaseConnector@{DatabaseConnector}!registerUser@{registerUser}}
+\index{registerUser@{registerUser}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{registerUser()}{registerUser()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550}{Database\+Connector\+::\+REGISTER\+\_\+\+USER\+\_\+\+RESULT}} Database\+Connector\+::register\+User (\begin{DoxyParamCaption}\item[{const QString \&}]{username,  }\item[{const QString \&}]{password }\end{DoxyParamCaption})}
+
+
+
+Регистрация пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em username} & -\/ имя пользователя \\
+\hline
+{\em password} & -\/ пароль \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+\mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550ae0aa021e21dddbd6d8cecec71e9cf564}{REGISTER\+\_\+\+USER\+\_\+\+RESULT\+::\+OK}}, если всё нормально, \mbox{\hyperlink{classDatabaseConnector_acdb6bed55a7a7fc3599a29f24f5f2550abb996a531afec7056344afa3e69092cc}{REGISTER\+\_\+\+USER\+\_\+\+RESULT\+::\+USER\+\_\+\+EXISTS}}, если имя пользователя занято, USER\+\_\+\+EXISTS\+::\+INTERNAL\+\_\+\+ERROR при внутренней ошибке. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 4
+\mbox{\Hypertarget{classDatabaseConnector_a5f5e79bbb4055bc3a0438d198fd94a11}\label{classDatabaseConnector_a5f5e79bbb4055bc3a0438d198fd94a11}} 
+\index{DatabaseConnector@{DatabaseConnector}!tokenFromUserId@{tokenFromUserId}}
+\index{tokenFromUserId@{tokenFromUserId}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{tokenFromUserId()}{tokenFromUserId()}}
+{\footnotesize\ttfamily QString Database\+Connector\+::token\+From\+User\+Id (\begin{DoxyParamCaption}\item[{int}]{user\+Id }\end{DoxyParamCaption})}
+
+Граф вызова функции\+:
+% FIG 5
+\mbox{\Hypertarget{classDatabaseConnector_a41992ec486af63aed14f507f4873436f}\label{classDatabaseConnector_a41992ec486af63aed14f507f4873436f}} 
+\index{DatabaseConnector@{DatabaseConnector}!userIdFromCredentials@{userIdFromCredentials}}
+\index{userIdFromCredentials@{userIdFromCredentials}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{userIdFromCredentials()}{userIdFromCredentials()}}
+{\footnotesize\ttfamily int Database\+Connector\+::user\+Id\+From\+Credentials (\begin{DoxyParamCaption}\item[{const QString \&}]{username,  }\item[{const QString \&}]{password }\end{DoxyParamCaption})}
+
+
+
+Получение ID пользователя по логину и паролю. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em username} & -\/ имя пользователя \\
+\hline
+{\em password} & -\/ пароль \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+ID пользователя при успехе. Если пользователь не найден, возвращает 0. При внутренней ошибке вернет -\/1. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 6
+\mbox{\Hypertarget{classDatabaseConnector_a2bbef4d1745a77340d0029388eae384c}\label{classDatabaseConnector_a2bbef4d1745a77340d0029388eae384c}} 
+\index{DatabaseConnector@{DatabaseConnector}!userQuota@{userQuota}}
+\index{userQuota@{userQuota}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{userQuota()}{userQuota()}}
+{\footnotesize\ttfamily int Database\+Connector\+::user\+Quota (\begin{DoxyParamCaption}\item[{const QString \&}]{token }\end{DoxyParamCaption})}
+
+
+
+Проверка, сколько осталось квоты у пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em token} & -\/ токен вида 11111f11-\/d518-\/4652-\/bb62-\/891c529f02a7 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+-\/1 при внутренней ошибке, размер квоты при успешном запросе. 
+\end{DoxyReturn}
+Граф вызова функции\+:
+% FIG 7
+
+
+\doxysubsection{Данные класса}
+\mbox{\Hypertarget{classDatabaseConnector_a72eb534f34958d6de47df47e03121b2f}\label{classDatabaseConnector_a72eb534f34958d6de47df47e03121b2f}} 
+\index{DatabaseConnector@{DatabaseConnector}!MAX\_DATABASE\_CONNECTIONS\_COUNT@{MAX\_DATABASE\_CONNECTIONS\_COUNT}}
+\index{MAX\_DATABASE\_CONNECTIONS\_COUNT@{MAX\_DATABASE\_CONNECTIONS\_COUNT}!DatabaseConnector@{DatabaseConnector}}
+\doxysubsubsection{\texorpdfstring{MAX\_DATABASE\_CONNECTIONS\_COUNT}{MAX\_DATABASE\_CONNECTIONS\_COUNT}}
+{\footnotesize\ttfamily const int Database\+Connector\+::\+MAX\+\_\+\+DATABASE\+\_\+\+CONNECTIONS\+\_\+\+COUNT = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{DatabaseConnector_8h}{Database\+Connector.\+h}}\item 
+src/\mbox{\hyperlink{DatabaseConnector_8cpp}{Database\+Connector.\+cpp}}\end{DoxyCompactItemize}

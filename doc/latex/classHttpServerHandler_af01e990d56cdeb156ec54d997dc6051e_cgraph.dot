@@ -1,0 +1,20 @@
+digraph "HttpServerHandler::HttpServerHandler"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="HttpServerHandler::\lHttpServerHandler",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="DatabaseConnector::\lregisterUser",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDatabaseConnector.html#adf414a7a9003a9e5b4ec4b7b587894e4",tooltip="Регистрация пользователя."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="HttpServerHandler::\lsetSslCertificate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHttpServerHandler.html#a7420875c3855b3d70a94d3b704d5b327",tooltip="Установка сертификата из файла."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="HttpServerHandler::\lsetSslPrivateKey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHttpServerHandler.html#ae88aee28e5879d03d6f873efe181c0e9",tooltip="Установка приватного ключа из файла."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="DatabaseConnector::\ltokenFromUserId",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDatabaseConnector.html#a5f5e79bbb4055bc3a0438d198fd94a11",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="DatabaseConnector::\luserIdFromCredentials",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDatabaseConnector.html#a41992ec486af63aed14f507f4873436f",tooltip="Получение ID пользователя по логину и паролю."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="DatabaseConnector::\luserQuota",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDatabaseConnector.html#a2bbef4d1745a77340d0029388eae384c",tooltip="Проверка, сколько осталось квоты у пользователя."];
+}

@@ -1,0 +1,89 @@
+\hypertarget{classAbstractSolver}{}\doxysection{Класс Abstract\+Solver}
+\label{classAbstractSolver}\index{AbstractSolver@{AbstractSolver}}
+
+
+Класс, абстрагирующий решение задачи.  
+
+
+
+
+{\ttfamily \#include $<$Abstract\+Solver.\+h$>$}
+
+
+
+Граф наследования\+:Abstract\+Solver\+:
+% FIG 0
+
+
+Граф связей класса Abstract\+Solver\+:
+% FIG 1
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAbstractSolver_ace5113ce1342d32c95fc743c48715c24}{Abstract\+Solver}} (QObject $\ast$parent=nullptr)
+\item 
+QHash$<$ QString, QString $>$ \mbox{\hyperlink{classAbstractSolver_a2f3e3bdca929a2a003897bebf1be3bd8}{url\+Query\+To\+Map}} (const QUrl\+Query \&query)
+\begin{DoxyCompactList}\small\item\em Функция, преобразующая QUrl\+Query в Hash\+Map. \end{DoxyCompactList}\item 
+virtual QJson\+Document \mbox{\hyperlink{classAbstractSolver_a77a5124d604b8d9b03ce8f15bdae800c}{solve}} (const QHash$<$ QString, QString $>$ input)=0
+\begin{DoxyCompactList}\small\item\em Чистая виртуальная функция, решающая задачу. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, абстрагирующий решение задачи. 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classAbstractSolver_ace5113ce1342d32c95fc743c48715c24}\label{classAbstractSolver_ace5113ce1342d32c95fc743c48715c24}} 
+\index{AbstractSolver@{AbstractSolver}!AbstractSolver@{AbstractSolver}}
+\index{AbstractSolver@{AbstractSolver}!AbstractSolver@{AbstractSolver}}
+\doxysubsubsection{\texorpdfstring{AbstractSolver()}{AbstractSolver()}}
+{\footnotesize\ttfamily Abstract\+Solver\+::\+Abstract\+Solver (\begin{DoxyParamCaption}\item[{QObject $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classAbstractSolver_a77a5124d604b8d9b03ce8f15bdae800c}\label{classAbstractSolver_a77a5124d604b8d9b03ce8f15bdae800c}} 
+\index{AbstractSolver@{AbstractSolver}!solve@{solve}}
+\index{solve@{solve}!AbstractSolver@{AbstractSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily virtual QJson\+Document Abstract\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const QHash$<$ QString, QString $>$}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Чистая виртуальная функция, решающая задачу. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em input} & -\/ QHash с необходимыми ключами и корректными значениями в виде QString. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возвращает QJson\+Document с данными о решении задачи. В нем всегда есть поле \char`\"{}status\char`\"{}, где отображено, было ли решение успешным или произошла ошибка. 
+\end{DoxyReturn}
+
+
+Замещается в \mbox{\hyperlink{classDichotomySolver_a301b9669d7128bfd8298723ac4d8d3b7}{Dichotomy\+Solver}}.
+
+\mbox{\Hypertarget{classAbstractSolver_a2f3e3bdca929a2a003897bebf1be3bd8}\label{classAbstractSolver_a2f3e3bdca929a2a003897bebf1be3bd8}} 
+\index{AbstractSolver@{AbstractSolver}!urlQueryToMap@{urlQueryToMap}}
+\index{urlQueryToMap@{urlQueryToMap}!AbstractSolver@{AbstractSolver}}
+\doxysubsubsection{\texorpdfstring{urlQueryToMap()}{urlQueryToMap()}}
+{\footnotesize\ttfamily QHash$<$ QString, QString $>$ Abstract\+Solver\+::url\+Query\+To\+Map (\begin{DoxyParamCaption}\item[{const QUrl\+Query \&}]{query }\end{DoxyParamCaption})}
+
+
+
+Функция, преобразующая QUrl\+Query в Hash\+Map. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em query} & -\/ данные Http запроса для преобразования. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+QHash, где название поля -\/ ключ, значение -\/ значение поля. Тип всех полей -\/ QString. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{AbstractSolver_8h}{Abstract\+Solver.\+h}}\item 
+src/\mbox{\hyperlink{AbstractSolver_8cpp}{Abstract\+Solver.\+cpp}}\end{DoxyCompactItemize}

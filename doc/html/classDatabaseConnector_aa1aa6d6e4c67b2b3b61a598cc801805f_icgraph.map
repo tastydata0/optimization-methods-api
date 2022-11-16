@@ -1,0 +1,4 @@
+<map id="DatabaseConnector::connect" name="DatabaseConnector::connect">
+<area shape="rect" id="node1" title="Подключение к БД, используя данные из database_secrets.ini." alt="" coords="212,5,371,47"/>
+<area shape="rect" id="node2" href="$classDatabaseConnector.html#a6abcd3330347a660d0a96400bd69da0f" title=" " alt="" coords="5,5,164,47"/>
+</map>

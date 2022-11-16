@@ -1,0 +1,4 @@
+<map id="DatabaseConnector::userQuota" name="DatabaseConnector::userQuota">
+<area shape="rect" id="node1" title="Проверка, сколько осталось квоты у пользователя." alt="" coords="204,5,363,47"/>
+<area shape="rect" id="node2" href="$classHttpServerHandler.html#af01e990d56cdeb156ec54d997dc6051e" title=" " alt="" coords="5,5,156,47"/>
+</map>

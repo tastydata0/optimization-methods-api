@@ -5,14 +5,21 @@
 #include <QSettings>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QThread>
+#include <QSqlDriver>
+#include <QSqlError>
 
+///
+/// \class DatabaseConnector
+/// \brief Класс, работающий с БД, инкапсулируя SQL-запросы
+///
 class DatabaseConnector : public QObject
 {
     Q_OBJECT
 
-
-
 public:
+
+    static const int MAX_DATABASE_CONNECTIONS_COUNT = 5;
 
     enum class REGISTER_USER_RESULT {OK, USER_EXISTS, INTERNAL_ERROR};
     enum class TOKEN_CHECK_RESULT {OK, OUT_OF_QUOTA, TOKEN_NOT_FOUND, INTERNAL_ERROR};
@@ -34,6 +41,12 @@ public:
     ///
     int userQuota(const QString& token);
 
+    ///
+    /// \brief уменьшение доступной квоты пользователя на 1.
+    /// \param token - токен пользователя
+    /// \return 1, если квота есть, 0, если закончилась, -1 при неудаче
+    ///
+    int decreaseUserQuota(const QString& token);
 
     ///
     /// \brief Получение ID пользователя по логину и паролю.
@@ -46,6 +59,8 @@ public:
     QString tokenFromUserId(int userId);
 
 private:
+
+    QString connectionName;
 
     ///
     /// \brief Проверка, существует ли пользователь с таким именем
