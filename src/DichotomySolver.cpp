@@ -22,11 +22,22 @@ QJsonDocument DichotomySolver::solve(const QHash<QString, QString> input)
     QProcess process;
     process.start(program, arguments);
 
-    QByteArray data = {"\"success\": false, \"error\": \"Internal error\""};
+    QByteArray data;
     if (process.waitForFinished()) {
         data = process.readAllStandardOutput();
     }
     process.close();
 
-    return QJsonDocument::fromJson(data);
+    QJsonParseError error;
+    QJsonDocument output = QJsonDocument::fromJson(data, &error);
+
+    if(error.error == QJsonParseError::NoError) {
+        return output;
+    }
+    else {
+        return QJsonDocument::fromJson("{\"success\": false, \"error\": \"Internal error\"}");
+    }
+
+
+
 }
