@@ -77,6 +77,6 @@ for i in range(n//2):
 
 output_json['x*'] = x_best
 output_json['f*'] = f_best
-output_json['status'] = 'success'
+output_json['success'] = True
 
 print(json.dumps(output_json))
