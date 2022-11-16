@@ -1,10 +1,5 @@
 #include "include/DatabaseConnector.h"
 
-#include <QSqlDriver>
-#include <QSqlError>
-
-
-
 DatabaseConnector::DatabaseConnector(QObject *parent)
     : QObject{parent}
 {

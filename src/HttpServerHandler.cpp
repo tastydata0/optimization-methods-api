@@ -1,7 +1,5 @@
 #include "include/HttpServerHandler.h"
 
-
-// const QThreadPool &databasePool,
 HttpServerHandler::HttpServerHandler(QThreadPool *databasePool, QObject *parent) : QObject(parent)
 {
     this->databaseConnectionsPool = databasePool;

@@ -6,12 +6,16 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QThread>
+#include <QSqlDriver>
+#include <QSqlError>
 
+///
+/// \class DatabaseConnector
+/// \brief Класс, работающий с БД, инкапсулируя SQL-запросы
+///
 class DatabaseConnector : public QObject
 {
     Q_OBJECT
-
-
 
 public:
 
